@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Car Note</string>
+    <string name="date">Date:</string>
+    <string name="mileage">Mileage:</string>
+    <string name="tanked_gas_liters">Tanked gas (liters):</string>
+    <string name="cost">Cost:</string>
+    <string name="confirm">Confirm</string>
+    <string name="go_to_tanking">Go to tanking</string>
+
+</resources>
