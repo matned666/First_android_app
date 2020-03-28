@@ -2,7 +2,6 @@ package com.workspace.carnote;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +21,7 @@ import java.util.Objects;
 
 public class GasTankUpActivity extends AppCompatActivity {
 
+    public static final String TITLE = "Nowe tankowanie";
     private EditText dateEditText;
     private EditText mileageEditText;
     private EditText litersEditText;
@@ -39,10 +39,12 @@ public class GasTankUpActivity extends AppCompatActivity {
         setContentView(R.layout.gas_tank_up_layout);
         viewInit();
         getIntence();
+        setTitle(TITLE);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void getIntence() {
+
         autoData = (AutoData) Objects.requireNonNull(getIntent().getExtras()).getSerializable(MainMenuActivity.SPECIAL_DATA);
     }
 
@@ -51,8 +53,9 @@ public class GasTankUpActivity extends AppCompatActivity {
         mileageEditText = findViewById(R.id.mileage);
         litersEditText = findViewById(R.id.liters);
         costEditText = findViewById(R.id.cost);
-        confirmButton = findViewById(R.id.confirm);
         dateEditText.setText(getCurrentDate());
+
+        confirmButton = findViewById(R.id.confirm);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

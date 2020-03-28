@@ -6,5 +6,16 @@
     <string name="cost">Cost:</string>
     <string name="confirm">Confirm</string>
     <string name="go_to_tanking">Go to tanking</string>
+    <string name="brand_label">Brand:</string>
+    <string name="brand_editText">Ford</string>
+    <string name="model_label">Model:</string>
+    <string name="model_editText">Turneo</string>
+    <string name="color_label">Color:</string>
+    <string name="color_editText">Blue</string>
+    <string name="plates_label">Plates:</string>
+    <string name="plates_editText">DW 7S301</string>
+    <string name="new_tank_up">New tank up</string>
+    <string name="new_collision">new_collision</string>
+    <string name="new_repair">new_repair</string>
 
 </resources>

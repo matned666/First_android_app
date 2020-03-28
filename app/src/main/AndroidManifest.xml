@@ -17,6 +17,7 @@
         </activity>
 
         <activity android:name=".GasTankUpActivity" />
+        <activity android:name=".AddCarActivity" />
 
 
     </application>

@@ -7,79 +7,79 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/date_label"
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/date"
+        android:text="@string/brand_label"
         android:textColor="#000000"
         android:textSize="18sp"
-        app:fontFamily="sans-serif"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/brand_editText"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#32C6B9"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/brand_editText" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/model_label"
+        android:textColor="#000000"
+        android:textSize="18sp"
         android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/date"
+        android:id="@+id/model_editText2"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#32C6B9"
         android:ems="10"
-        android:inputType="date" />
+        android:inputType="textPersonName"
+        android:text="@string/model_editText" />
 
     <TextView
-        android:id="@+id/mileage_label"
+        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/mileage"
+        android:text="@string/color_label"
         android:textColor="#000000"
         android:textSize="18sp"
-        app:fontFamily="sans-serif"
-        android:textStyle="bold"/>/>
+        android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/mileage"
+        android:id="@+id/color_editText3"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#32C6B9"
         android:ems="10"
-        android:inputType="number" />
+        android:inputType="textPersonName"
+        android:text="@string/color_editText" />
 
     <TextView
-        android:id="@+id/liters_label"
+        android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tanked_gas_liters"
+        android:text="@string/plates_label"
         android:textColor="#000000"
         android:textSize="18sp"
-        app:fontFamily="sans-serif"
-        android:textStyle="bold"/>/>
+        android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/liters"
+        android:id="@+id/plates_editText4"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#32C6B9"
         android:ems="10"
-        android:inputType="number" />
+        android:inputType="textPersonName"
+        android:text="@string/plates_editText" />
 
     <TextView
-        android:id="@+id/cost_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cost"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:fontFamily="sans-serif"
-        android:textStyle="bold"/>/>
-
-    <EditText
-        android:id="@+id/cost"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#32C6B9"
-        android:ems="10"
-        android:inputType="number" />
-
-    <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/textView22"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -94,32 +94,29 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/textView23"
         android:layout_width="match_parent"
         android:layout_height="30dp" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView3"
         android:layout_width="match_parent"
         android:layout_height="142dp"
         android:tint="#0A7369"
         app:srcCompat="@drawable/ic_logo" />
 
     <TextView
-        android:id="@+id/textView28"
+        android:id="@+id/textView26"
         android:layout_width="match_parent"
         android:layout_height="195dp" />
 
     <TextView
-        android:id="@+id/textView29"
+        android:id="@+id/textView27"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
         android:text="Made by MRNDesign.eu   "
         android:textAlignment="viewEnd"
-        android:textStyle="italic" /><![CDATA[
+        android:textStyle="italic" />
 
-    />
-
-]]>
 </LinearLayout>
