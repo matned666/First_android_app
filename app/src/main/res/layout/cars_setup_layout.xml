@@ -40,79 +40,36 @@
                 android:layout_height="10dp" />
 
             <Button
-                android:id="@+id/go_to_raport_btn"
+                android:id="@+id/go_to_add_car_form_btn"
                 style="@style/comonEditTextStyleBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#1FCDBD"
-                android:drawableTop="@drawable/ic_raport"
-                android:text="@string/raport"
+                android:drawableTop="@drawable/ic_add_car"
+                android:shadowColor="#000000"
+                android:text="@string/add_car"
                 android:textSize="15sp"
                 tools:targetApi="lollipop" />
 
             <Button
-                android:id="@+id/go_to_add_insurance_btn"
+                android:id="@+id/go_to_remove_car_form_btn"
                 style="@style/comonEditTextStyleBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#1FCDBD"
-                android:drawableTop="@drawable/ic_insurance"
-                android:text="@string/add_insurance"
+                android:drawableTop="@drawable/ic_remove_car"
+                android:text="@string/remove_car"
                 android:textSize="15sp"
                 tools:targetApi="lollipop" />
 
             <Button
-                android:id="@+id/go_to_tank_btn"
+                android:id="@+id/go_to_edit_car_form_btn"
                 style="@style/comonEditTextStyleBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#1FCDBD"
-                android:drawableTop="@drawable/ic_new_tank_up"
-                android:text="@string/new_tank_up"
-                android:textSize="15sp"
-                tools:targetApi="lollipop" />
-
-            <Button
-                android:id="@+id/go_to_repair_btn"
-                style="@style/comonEditTextStyleBottomMargin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#1FCDBD"
-                android:drawableTop="@drawable/ic_new_repair"
-                android:text="@string/new_repair"
-                android:textSize="15sp"
-                tools:targetApi="lollipop" />
-
-            <Button
-                android:id="@+id/go_to_collision_btn"
-                style="@style/comonEditTextStyleBottomMargin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#1FCDBD"
-                android:drawableTop="@drawable/ic_crash"
-                android:text="@string/new_collision"
-                android:textSize="15sp"
-                tools:targetApi="lollipop" />
-
-            <Button
-                android:id="@+id/go_to_car_form_btn"
-                style="@style/comonEditTextStyleBottomMargin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#1FCDBD"
-                android:drawableTop="@drawable/ic_add_new_car"
-                android:text="@string/add_new_car"
-                android:textSize="15sp"
-                tools:targetApi="lollipop" />
-
-            <Button
-                android:id="@+id/settings_btn"
-                style="@style/comonEditTextStyleBottomMargin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#1FCDBD"
-                android:drawableTop="@drawable/ic_settings"
-                android:text="@string/settings"
+                android:drawableTop="@drawable/ic_edit_car"
+                android:text="@string/edit_car"
                 android:textSize="15sp"
                 tools:targetApi="lollipop" />
 

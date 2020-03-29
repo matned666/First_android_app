@@ -34,6 +34,9 @@ public class AutoData implements Serializable {
     public List<TankUpRecord> getTankUpRecord() {
         return tankUpRecord;
     }
+    public void setTankUpRecord(List<TankUpRecord> tankUpRecord) {
+        this.tankUpRecord = tankUpRecord;
+    }
 
     public String getModel() {
         return model;

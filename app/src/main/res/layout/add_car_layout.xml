@@ -1,122 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#009688"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <TextView
-        android:id="@+id/textView"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/brand_label"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        tools:ignore="UselessParent">
 
-    <EditText
-        android:id="@+id/brand_editText"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#32C6B9"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/brand_editText" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#02AA9A"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/model_label"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/textView"
+                style="@style/comonEditTextStyleNoBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/brand_label" />
 
-    <EditText
-        android:id="@+id/model_editText2"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#32C6B9"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/model_editText" />
+            <EditText
+                android:id="@+id/brand_editText"
+                style="@style/comonEditTextStyleBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:autofillHints="Car brand"
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:ignore="LabelFor" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/color_label"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/comonEditTextStyleNoBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/model_label" />
 
-    <EditText
-        android:id="@+id/color_editText3"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#32C6B9"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/color_editText" />
+            <EditText
+                android:id="@+id/model_editText2"
+                style="@style/comonEditTextStyleBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:autofillHints="Car's model"
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:ignore="LabelFor" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/plates_label"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/comonEditTextStyleNoBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/color_label" />
 
-    <EditText
-        android:id="@+id/plates_editText4"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#32C6B9"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/plates_editText" />
+            <EditText
+                android:id="@+id/color_editText3"
+                style="@style/comonEditTextStyleBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:autofillHints="Car's color"
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:ignore="LabelFor" />
 
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/comonEditTextStyleNoBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/plates_label" />
 
-    <Button
-        android:id="@+id/confirm"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="#1FCDBD"
-        android:text="@string/confirm"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+            <EditText
+                android:id="@+id/plates_editText4"
+                style="@style/comonEditTextStyleBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:autofillHints="Your registry plates number"
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:ignore="LabelFor" />
 
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="142dp"
-        android:tint="#0A7369"
-        app:srcCompat="@drawable/ic_logo" />
+            <Switch
+                android:id="@+id/is_Default_Car"
+                style="commonSwitchStyleNoBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:soundEffectsEnabled="true"
+                android:text="@string/is_it_your_default_car"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="match_parent"
-        android:layout_height="195dp" />
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:text="Made by MRNDesign.eu   "
-        android:textAlignment="viewEnd"
-        android:textStyle="italic" />
+            <Button
+                android:id="@+id/confirm"
+                style="@style/comonEditTextStyleBottomAndTopMargin"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:text="@string/confirm" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="142dp"
+                android:contentDescription="@string/car_logo"
+                android:tint="#0A7369"
+                app:srcCompat="@drawable/ic_logo" />
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:gravity="end"
+                android:text="@string/made_by_sign"
+                android:textAlignment="center"
+                android:textStyle="italic"
+                tools:ignore="RtlCompat" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

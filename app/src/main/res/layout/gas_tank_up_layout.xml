@@ -1,125 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#009688"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <TextView
-        android:id="@+id/date_label"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/date"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:fontFamily="sans-serif"
-        android:textStyle="bold"/>
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/date"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#32C6B9"
-        android:ems="10"
-        android:inputType="date" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#02AA9A"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-    <TextView
-        android:id="@+id/mileage_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/mileage"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:fontFamily="sans-serif"
-        android:textStyle="bold"/>/>
+            <TextView
+                android:id="@+id/date_label"
+                style="@style/comonEditTextStyleNoBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/date" />
 
-    <EditText
-        android:id="@+id/mileage"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#32C6B9"
-        android:ems="10"
-        android:inputType="number" />
+            <EditText
+                android:id="@+id/date"
+                style="@style/comonEditTextStyleBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="Date"
+                android:background="#32C6B9"
+                android:ems="10"
+                android:focusableInTouchMode="false"
+                android:inputType="date"
+                android:longClickable="false" />
 
-    <TextView
-        android:id="@+id/liters_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/tanked_gas_liters"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:fontFamily="sans-serif"
-        android:textStyle="bold"/>/>
+            <TextView
+                android:id="@+id/mileage_label"
+                style="@style/comonEditTextStyleNoBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mileage" />
 
-    <EditText
-        android:id="@+id/liters"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#32C6B9"
-        android:ems="10"
-        android:inputType="number" />
+            <EditText
+                android:id="@+id/mileage"
+                style="@style/comonEditTextStyleBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="Your car's actual mileage"
+                android:ems="10"
+                android:inputType="number"
+                tools:ignore="LabelFor" />
 
-    <TextView
-        android:id="@+id/cost_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cost"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:fontFamily="sans-serif"
-        android:textStyle="bold"/>/>
+            <TextView
+                android:id="@+id/liters_label"
+                style="@style/comonEditTextStyleNoBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tanked_gas_liters" />
 
-    <EditText
-        android:id="@+id/cost"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#32C6B9"
-        android:ems="10"
-        android:inputType="number" />
+            <EditText
+                android:id="@+id/liters"
+                style="@style/comonEditTextStyleBottomMargin"
+                android:autofillHints="Homw many liters did you tank?"
+                android:ems="10"
+                android:inputType="number"
+                tools:ignore="LabelFor" />
 
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/cost_label"
+                style="@style/comonEditTextStyleNoBottomMargin"
+                android:text="@string/cost" />
 
-    <Button
-        android:id="@+id/confirm"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="#1FCDBD"
-        android:text="@string/confirm"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+            <EditText
+                android:id="@+id/cost"
+                style="@style/comonEditTextStyleBottomMargin"
+                android:autofillHints="Write money spent on this tanking"
+                android:ems="10"
+                android:inputType="number"
+                tools:ignore="LabelFor" />
 
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
+            <Button
+                android:id="@+id/confirm"
+                style="@style/comonEditTextStyleBottomAndTopMargin"
+                android:background="#1FCDBD"
+                android:text="@string/confirm"
+                android:textColor="#000000"
+                android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="142dp"
-        android:tint="#0A7369"
-        app:srcCompat="@drawable/ic_logo" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="142dp"
+                android:contentDescription="@string/car_logo"
+                android:tint="#0A7369"
+                app:srcCompat="@drawable/ic_logo" />
 
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="match_parent"
-        android:layout_height="195dp" />
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:gravity="bottom|end"
+                android:text="@string/made_by_sign"
+                android:textAlignment="center"
+                android:textStyle="italic"
+                tools:ignore="RtlCompat" />
 
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:text="Made by MRNDesign.eu   "
-        android:textAlignment="viewEnd"
-        android:textStyle="italic" /><![CDATA[
-
-    />
-
-]]>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
