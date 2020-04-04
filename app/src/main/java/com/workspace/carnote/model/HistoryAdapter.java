@@ -2,6 +2,7 @@ package com.workspace.carnote.model;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.workspace.carnote.MainMenuActivity;
 import com.workspace.carnote.R;
 
 import java.text.DateFormat;
@@ -49,9 +52,28 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.historyTextViewBottomLeft.setText("Tanked: "+tankUpRecord.getTankedUpGasLiters().toString()+" L");
         holder.historyTextViewBottomRight.setText("for: "+tankUpRecord.getCostInPLN().toString()+" PLN");
          holder.deleteItemImageView.setOnClickListener(v -> {
-             tankList.remove(position);
-             HistoryAdapter.this.notifyDataSetChanged();
+            confirmCarRemoveDialog(position);
          });
+    }
+
+    private void confirmCarRemoveDialog(int position) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this.context);
+        dialog  .setMessage("REMOVE THE SELECTED RECORD?")
+                .setPositiveButton("NO",  new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+
+                    }
+                })
+                .setNegativeButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int id) {
+                        tankList.remove(position);
+                        HistoryAdapter.this.notifyDataSetChanged();
+                    }
+                })
+                .show();
     }
 
     @Override

@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,16 +15,17 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.workspace.carnote.model.AutoData;
+import com.workspace.carnote.model.GsonQuest;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Objects;
 
 public class CarSetupActivity extends AppCompatActivity {
 
     public static final String CARS_DATA = "CARS DATA";
 
     private static final int REQUEST_CODE_AddCarFormActivity = 123;
+    public static final String AUTO_PREF = "AUTO_PREF";
 
     private Button addCarButton;
     private Button removeCarButton;
@@ -33,7 +33,7 @@ public class CarSetupActivity extends AppCompatActivity {
     private Button confirm;
 
     private Spinner autoChooseSpinner;
-    private ArrayList<AutoData> cars;
+    private ArrayList cars;
     private ArrayAdapter<AutoData> arrayAdapter;
 
 
@@ -44,7 +44,6 @@ public class CarSetupActivity extends AppCompatActivity {
         cars = new ArrayList<>();
         getIntence();
         initArrayAdapter();
-        System.out.println("JEBAĆ FRANKÓW: "+cars);
         autoChooseSpinner = findViewById(R.id.auto_choose_spinner);
         autoChooseSpinner.setAdapter(arrayAdapter);
         //TODO nie można wybrać auta - coś się zjebało
@@ -60,31 +59,26 @@ public class CarSetupActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Intent intent = new Intent(CarSetupActivity.this, MainMenuActivity.class);
-        Bundle args = new Bundle();
-        args.putSerializable(CARS_DATA, cars);
-        intent.putExtra("BUNDLE",args);
-        setResult(Activity.RESULT_OK, intent);
-        finish();
+    public void onBackPressed() {
+        Intent intent = new Intent(this,MainMenuActivity.class);
+        getOutgoingIntent(intent);
+        super.onBackPressed();
     }
 
     private View.OnClickListener confirmFormActivity() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("JEBAĆ BASKÓW: "+cars);
-                Intent intent = new Intent();
-                intent.putExtra(CARS_DATA, cars);
-                setResult(Activity.RESULT_OK, intent);
-                finish();
-            }
+        return v -> {
+            Intent intent = new Intent();
+            getOutgoingIntent(intent);
         };
     }
 
+    private void getOutgoingIntent(Intent intent) {
+        intent.putExtra("PUT CARS", GsonQuest.make(cars));
+        setResult(Activity.RESULT_OK, intent);
+    }
+
     private void getIntence() {
-        cars.addAll((ArrayList<AutoData>) getIntent().getExtras().getSerializable(MainMenuActivity.GIVE_CARS_LIST));
+        cars = GsonQuest.getList((String) Objects.requireNonNull(getIntent().getExtras()).get(MainMenuActivity.GIVE_CARS_LIST));
     }
 
     private View.OnClickListener goToAddCarFormActivity() {
@@ -143,7 +137,7 @@ public class CarSetupActivity extends AppCompatActivity {
 
     private void confirmCarRemoveDialog() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog  .setMessage("Are you sure?")
+        dialog  .setMessage("REMOVE THE SELECTED CAR?\n"+getCurrentCar().toString())
                 .setPositiveButton("Yes",  new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {

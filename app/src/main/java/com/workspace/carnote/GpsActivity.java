@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GpsActivity extends AppCompatActivity {
 
+    private int bestTimeTo100;
+    private int secTo100;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +41,8 @@ public class GpsActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         //zapisać do bunle stan aktual;nej pozycji
+        //ostatnie odczyty
+        //rekord
         super.onSaveInstanceState(outState);
     }
 }

@@ -3,6 +3,7 @@ package com.workspace.carnote;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -17,19 +18,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.workspace.carnote.model.AutoData;
-import com.workspace.carnote.model.CarsList_DemoFill;
+import com.workspace.carnote.model.GsonQuest;
 import com.workspace.carnote.model.HistoryAdapter;
 import com.workspace.carnote.model.TankUpRecord;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainMenuActivity extends AppCompatActivity {
 
     public static final String SPECIAL_DATA = "SPECIAL_DATA";
     public static final String GIVE_CARS_LIST = "GIVE CARS LIST";
-    private int REQUEST_CODE_CarFormActivity = 12345;
-    private int REQUEST_CODE_tankUpActivity = 12346;
+    public static final String AUTO_PREF = "AUTO PREF";
+    public static final int REQUEST_CODE_AddCarFormActivity = 12344;
+    private static final int REQUEST_CODE_CarFormActivity = 12345;
+    private static final int REQUEST_CODE_tankUpActivity = 12346;
 
     private Button goToTankFormButton;
     private Button goRepairFormButton;
@@ -40,27 +46,45 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button goToSettingsFormButton;
 
     private RecyclerView historyRecyclerView;
-    private RecyclerView.Adapter historyAdapter;
+    private RecyclerView.Adapter<HistoryAdapter.ViewHolder> historyAdapter;
     private RecyclerView.LayoutManager historyLayoutManager;
 
     private Spinner autoChooseSpinner;
-    private ArrayList<AutoData> cars;
-    private ArrayAdapter<AutoData> arrayAdapter;
+    private ArrayList cars;
+    private ArrayAdapter<AutoData> spinnerAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu_layout);
+
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        editor.putString(AUTO_PREF, gson.toJson(cars));
+        editor.apply();
+
     }
 
     private void initView() {
         initializeButtons();
         initializeButtonActions();
 
-        add_DEMO_Autodata();
+        initAutoList_cars();
         initArrayAdapter();
         initRecycleView();
+
+
+        if(cars.isEmpty()){
+            Intent intent = new Intent(MainMenuActivity.this, AddCarActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_AddCarFormActivity);
+        }
 
     }
 
@@ -87,9 +111,9 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     private void initArrayAdapter() {
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cars);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        autoChooseSpinner.setAdapter(arrayAdapter);
+        spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cars);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        autoChooseSpinner.setAdapter(spinnerAdapter);
     }
 
     private void initRecycleView() {
@@ -111,7 +135,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     private void addNewCarTankUpRecordsList() {
-        historyAdapter = new HistoryAdapter(this, getCurrentCar().getTankUpRecord());
+        historyAdapter = new HistoryAdapter(this, getCurrentCar() != null ? getCurrentCar().getTankUpRecord() : new ArrayList<TankUpRecord>());
         historyRecyclerView.setAdapter(historyAdapter);
     }
 
@@ -122,14 +146,10 @@ public class MainMenuActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_CarFormActivity) {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
-//                    cars.clear();
-//                    cars.addAll((ArrayList<AutoData>) getIntent().getExtras().getSerializable(CarSetupActivity.CARS_DATA));
-
-//                    System.out.println((ArrayList<AutoData>) getIntent().getExtras().get(CarSetupActivity.CARS_DATA));
-
+                    cars = GsonQuest.getList((String) Objects.requireNonNull(data.getExtras()).get("PUT CARS"));
+                    initArrayAdapter();
                     addNewCarTankUpRecordsList();
 
-                    System.out.println("MOJA LISTA: " + cars);
 //TODO dane z add car gubią się w main menu
 
                 }
@@ -141,6 +161,25 @@ public class MainMenuActivity extends AppCompatActivity {
                 }
             }
         }
+
+        if (requestCode == REQUEST_CODE_AddCarFormActivity) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    AutoData newAutoData = (AutoData) data.getExtras().get(AddCarActivity.AUTO_DATA_NEW_CAR);
+                    Boolean isNewCarDefaultCar = (Boolean) data.getExtras().get(AddCarActivity.IS_NEW_CAR_DEFAULT);
+
+                    if (isNewCarDefaultCar != null && isNewCarDefaultCar) {
+                        cars.add(0, newAutoData);
+                        autoChooseSpinner.setAdapter(spinnerAdapter);
+                        autoChooseSpinner.setSelection(0, false);
+                    }
+
+                    else cars.add(newAutoData);
+                    autoChooseSpinner.setAdapter(spinnerAdapter);
+                    autoChooseSpinner.setSelection(cars.size()-1, false);
+                }
+            }
+        }
         historyAdapter.notifyDataSetChanged();
 
 
@@ -149,7 +188,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private View.OnClickListener goToCarFormActivity() {
         return v -> {
             Intent intent = new Intent(MainMenuActivity.this, CarSetupActivity.class);
-            intent.putExtra(GIVE_CARS_LIST, cars);
+            intent.putExtra(GIVE_CARS_LIST, GsonQuest.make(cars));
             startActivityForResult(intent, REQUEST_CODE_CarFormActivity);
         };
     }
@@ -201,9 +240,16 @@ public class MainMenuActivity extends AppCompatActivity {
         };
     }
 
-    private void add_DEMO_Autodata() {
-        cars = new ArrayList<>();
-        CarsList_DemoFill.fill(cars,5,20);
+    private void initAutoList_cars() {
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        String string = sharedPreferences.getString(AUTO_PREF, null);
+        Gson gson = new Gson();
+        ArrayList<AutoData> newCarsList = gson.fromJson(string, new TypeToken<ArrayList<AutoData>>() {
+        }.getType());
+
+        if (newCarsList != null){
+            cars = newCarsList;
+        } else cars = new ArrayList<>();
     }
 
     private AutoData getCurrentCar() {
