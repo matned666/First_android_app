@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#009688"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#02AA9A"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView9"
+                style="@style/commonEditTextStyleNoBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="SETTINGS"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/commonEditTextStyleNoBottomMargin"
+                android:text=" Sounds" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <Button
+                android:id="@+id/confirm"
+                style="@style/commonEditTextStyleBottomAndTopMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="NEW COMPANY" />
+
+            <Button
+                android:id="@+id/confirm5"
+                style="@style/commonEditTextStyleBottomAndTopMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LOAD COMPANY"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="142dp"
+        android:contentDescription="@string/car_logo"
+        android:tint="#0A7369"
+        app:srcCompat="@drawable/ic_logo" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:gravity="end"
+        android:text="@string/made_by_sign"
+        android:textAlignment="center"
+        android:textStyle="italic"
+        tools:ignore="RtlCompat" />
+
+</LinearLayout>

@@ -19,6 +19,12 @@
         <activity android:name=".GasTankUpActivity" />
         <activity android:name=".AddCarActivity" />
         <activity android:name=".CarSetupActivity" />
+        <activity android:name=".AdditionalCostsActivity" />
+        <activity android:name=".CostRaportActivity" />
+        <activity android:name=".CollisionActivity" />
+        <activity android:name=".DetailedCostRaport" />
+        <activity android:name=".RepairActivity" />
+        <activity android:name=".SettingsActivity" />
 
 
     </application>

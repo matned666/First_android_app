@@ -14,7 +14,7 @@ public class TankUpRecord implements Serializable {
     private Integer tankedUpGasLiters;
     private Integer costInPLN;
 
-    private TankUpRecord(Builder builder) {
+    public TankUpRecord(Builder builder) {
         this.tankUpDate = builder.tankUpDate;
         this.mileage = builder.mileage;
         this.tankedUpGasLiters = builder.tankedUpGasLiters;

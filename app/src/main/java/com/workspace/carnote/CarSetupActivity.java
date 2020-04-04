@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.workspace.carnote.model.AutoData;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -29,6 +30,7 @@ public class CarSetupActivity extends AppCompatActivity {
     private Button addCarButton;
     private Button removeCarButton;
     private Button editCarButton;
+    private Button confirm;
 
     private Spinner autoChooseSpinner;
     private ArrayList<AutoData> cars;
@@ -42,6 +44,7 @@ public class CarSetupActivity extends AppCompatActivity {
         cars = new ArrayList<>();
         getIntence();
         initArrayAdapter();
+        System.out.println("JEBAĆ FRANKÓW: "+cars);
         autoChooseSpinner = findViewById(R.id.auto_choose_spinner);
         autoChooseSpinner.setAdapter(arrayAdapter);
         //TODO nie można wybrać auta - coś się zjebało
@@ -49,23 +52,39 @@ public class CarSetupActivity extends AppCompatActivity {
         addCarButton = findViewById(R.id.go_to_add_car_form_btn);
         removeCarButton = findViewById(R.id.go_to_remove_car_form_btn);
         editCarButton = findViewById(R.id.go_to_edit_car_form_btn);
+        confirm = findViewById(R.id.confirm_cars_changes_btn);
 
         addCarButton.setOnClickListener(goToAddCarFormActivity());
         removeCarButton.setOnClickListener(goToRemoveCarFormActivity());
-
-    }
-
-    private void getIntence() {
-        cars.addAll((Collection<? extends AutoData>) getIntent().getExtras().getSerializable(MainMenuActivity.GIVE_CARS_LIST));
+        confirm.setOnClickListener(confirmFormActivity());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Intent intent = new Intent();
-        intent.putExtra(CARS_DATA, cars);
+        Intent intent = new Intent(CarSetupActivity.this, MainMenuActivity.class);
+        Bundle args = new Bundle();
+        args.putSerializable(CARS_DATA, cars);
+        intent.putExtra("BUNDLE",args);
         setResult(Activity.RESULT_OK, intent);
         finish();
+    }
+
+    private View.OnClickListener confirmFormActivity() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("JEBAĆ BASKÓW: "+cars);
+                Intent intent = new Intent();
+                intent.putExtra(CARS_DATA, cars);
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+            }
+        };
+    }
+
+    private void getIntence() {
+        cars.addAll((ArrayList<AutoData>) getIntent().getExtras().getSerializable(MainMenuActivity.GIVE_CARS_LIST));
     }
 
     private View.OnClickListener goToAddCarFormActivity() {

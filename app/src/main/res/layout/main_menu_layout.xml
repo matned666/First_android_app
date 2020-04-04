@@ -10,7 +10,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="10dp"
         tools:ignore="UselessParent">
 
@@ -21,105 +21,235 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="10dp" />
-
-            <Spinner
-                android:id="@+id/auto_choose_spinner"
+                android:id="@+id/textView12"
+                style="@style/commonEditTextStyleNoBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#1FCDBD"
-                android:soundEffectsEnabled="true"
-                android:textColor="#000000"
-                android:textSize="18sp" />
+                android:gravity="center_horizontal"
+                android:text="DEFAULT COMPANY"
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="10dp" />
 
-            <Button
-                android:id="@+id/go_to_raport_btn"
-                style="@style/comonEditTextStyleBottomMargin"
+            <Spinner
+                android:id="@+id/auto_choose_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#1FCDBD"
-                android:drawableTop="@drawable/ic_raport"
-                android:text="@string/raport"
-                android:textSize="15sp"
-                tools:targetApi="lollipop" />
+                android:layout_height="23dp"
+                android:background="#1FCDBD"
+                android:soundEffectsEnabled="true"
+                android:textColor="#000000"
+                android:textSize="18sp" />
 
-            <Button
-                android:id="@+id/go_to_add_insurance_btn"
-                style="@style/comonEditTextStyleBottomMargin"
+            <TextView
+                android:id="@+id/textView6"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#1FCDBD"
-                android:drawableTop="@drawable/ic_insurance"
-                android:text="@string/add_insurance"
-                android:textSize="15sp"
-                tools:targetApi="lollipop" />
+                android:layout_height="10dp" />
 
-            <Button
-                android:id="@+id/go_to_tank_btn"
-                style="@style/comonEditTextStyleBottomMargin"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#1FCDBD"
-                android:drawableTop="@drawable/ic_new_tank_up"
-                android:text="@string/new_tank_up"
-                android:textSize="15sp"
-                tools:targetApi="lollipop" />
+                android:layout_height="match_parent"
+                android:background="#0ECFBB"
+                tools:layout_editor_absoluteX="25dp"
+                tools:layout_editor_absoluteY="25dp">
 
-            <Button
-                android:id="@+id/go_to_repair_btn"
-                style="@style/comonEditTextStyleBottomMargin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#1FCDBD"
-                android:drawableTop="@drawable/ic_new_repair"
-                android:text="@string/new_repair"
-                android:textSize="15sp"
-                tools:targetApi="lollipop" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/history_recycleView"
+                    style="@style/textFieldRaportInformation"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/imageView2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.52" />
 
-            <Button
-                android:id="@+id/go_to_collision_btn"
-                style="@style/comonEditTextStyleBottomMargin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#1FCDBD"
-                android:drawableTop="@drawable/ic_crash"
-                android:text="@string/new_collision"
-                android:textSize="15sp"
-                tools:targetApi="lollipop" />
+                <Button
+                    android:id="@+id/go_to_collision_btn"
+                    style="@style/commonEditTextStyleBottomMargin"
+                    android:layout_width="80dp"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#1FCDBD"
+                    android:drawableTop="@drawable/ic_crash"
+                    android:text="@string/new_collision"
+                    android:textSize="12sp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/history_recycleView"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:targetApi="lollipop" />
 
-            <Button
-                android:id="@+id/go_to_car_form_btn"
-                style="@style/comonEditTextStyleBottomMargin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#1FCDBD"
-                android:drawableTop="@drawable/ic_add_new_car"
-                android:text="@string/add_new_car"
-                android:textSize="15sp"
-                tools:targetApi="lollipop" />
+                <Button
+                    android:id="@+id/go_to_tank_btn"
+                    style="@style/commonEditTextStyleBottomMargin"
+                    android:layout_width="80dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#1FCDBD"
+                    android:drawableTop="@drawable/ic_new_tank_up"
+                    android:text="@string/new_tank_up"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/go_to_raport_btn"
+                    app:layout_constraintEnd_toEndOf="@+id/go_to_raport_btn"
+                    app:layout_constraintStart_toStartOf="@+id/go_to_raport_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                    tools:targetApi="lollipop" />
 
-            <Button
-                android:id="@+id/settings_btn"
-                style="@style/comonEditTextStyleBottomMargin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#1FCDBD"
-                android:drawableTop="@drawable/ic_settings"
-                android:text="@string/settings"
-                android:textSize="15sp"
-                tools:targetApi="lollipop" />
+                <Button
+                    android:id="@+id/go_company_settings_btn"
+                    style="@style/commonEditTextStyleBottomMargin"
+                    android:layout_width="80dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#1FCDBD"
+                    android:drawableTop="@drawable/ic_group_work"
+                    android:text="company"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/history_recycleView"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:targetApi="lollipop" />
+
+                <Button
+                    android:id="@+id/go_to_raport_btn"
+                    style="@style/commonEditTextStyleBottomMargin"
+                    android:layout_width="80dp"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#1FCDBD"
+                    android:drawableTop="@drawable/ic_raport"
+                    android:text="@string/raport"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.666"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:targetApi="lollipop" />
+
+                <Button
+                    android:id="@+id/go_to_car_form_btn"
+                    style="@style/commonEditTextStyleBottomMargin"
+                    android:layout_width="80dp"
+                    android:layout_height="65dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#1FCDBD"
+                    android:drawableTop="@drawable/ic_add_new_car"
+                    android:text="@string/add_new_car"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/go_company_settings_btn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/go_company_settings_btn"
+                    tools:targetApi="lollipop" />
+
+                <Button
+                    android:id="@+id/go_to_add_insurance_btn"
+                    style="@style/commonEditTextStyleBottomMargin"
+                    android:layout_width="80dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#1FCDBD"
+                    android:drawableTop="@drawable/ic_insurance"
+                    android:text="@string/add_insurance"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/settings_btn"
+                    app:layout_constraintEnd_toEndOf="@+id/settings_btn"
+                    app:layout_constraintStart_toStartOf="@+id/settings_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                    tools:targetApi="lollipop" />
+
+                <Button
+                    android:id="@+id/go_to_repair_btn"
+                    style="@style/commonEditTextStyleBottomMargin"
+                    android:layout_width="80dp"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#1FCDBD"
+                    android:drawableTop="@drawable/ic_new_repair"
+                    android:text="@string/new_repair"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/go_to_raport_btn"
+                    app:layout_constraintEnd_toEndOf="@+id/go_to_collision_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                    tools:targetApi="lollipop" />
+
+                <Button
+                    android:id="@+id/settings_btn"
+                    style="@style/commonEditTextStyleBottomMargin"
+                    android:layout_width="80dp"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#1FCDBD"
+                    android:drawableTop="@drawable/ic_settings"
+                    android:text="@string/settings"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.336"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/history_recycleView"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:targetApi="lollipop" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:contentDescription="@string/car_logo"
+                    android:tint="#0A7369"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.68"
+                    app:srcCompat="@drawable/ic_logo" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/imageView4"
                 android:layout_width="match_parent"
-                android:layout_height="126dp"
+                android:layout_height="142dp"
                 android:contentDescription="@string/car_logo"
                 android:tint="#0A7369"
                 app:srcCompat="@drawable/ic_logo" />

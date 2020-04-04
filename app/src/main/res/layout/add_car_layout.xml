@@ -22,14 +22,14 @@
 
             <TextView
                 android:id="@+id/textView"
-                style="@style/comonEditTextStyleNoBottomMargin"
+                style="@style/commonEditTextStyleNoBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/brand_label" />
 
             <EditText
                 android:id="@+id/brand_editText"
-                style="@style/comonEditTextStyleBottomMargin"
+                style="@style/commonEditTextStyleBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:autofillHints="Car brand"
@@ -39,14 +39,14 @@
 
             <TextView
                 android:id="@+id/textView2"
-                style="@style/comonEditTextStyleNoBottomMargin"
+                style="@style/commonEditTextStyleNoBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/model_label" />
 
             <EditText
                 android:id="@+id/model_editText2"
-                style="@style/comonEditTextStyleBottomMargin"
+                style="@style/commonEditTextStyleBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:autofillHints="Car's model"
@@ -56,14 +56,14 @@
 
             <TextView
                 android:id="@+id/textView3"
-                style="@style/comonEditTextStyleNoBottomMargin"
+                style="@style/commonEditTextStyleNoBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/color_label" />
 
             <EditText
                 android:id="@+id/color_editText3"
-                style="@style/comonEditTextStyleBottomMargin"
+                style="@style/commonEditTextStyleBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:autofillHints="Car's color"
@@ -73,14 +73,14 @@
 
             <TextView
                 android:id="@+id/textView4"
-                style="@style/comonEditTextStyleNoBottomMargin"
+                style="@style/commonEditTextStyleNoBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/plates_label" />
 
             <EditText
                 android:id="@+id/plates_editText4"
-                style="@style/comonEditTextStyleBottomMargin"
+                style="@style/commonEditTextStyleBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:autofillHints="Your registry plates number"
@@ -112,7 +112,7 @@
 
             <Button
                 android:id="@+id/confirm"
-                style="@style/comonEditTextStyleBottomAndTopMargin"
+                style="@style/commonEditTextStyleBottomAndTopMargin"
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
                 android:text="@string/confirm" />

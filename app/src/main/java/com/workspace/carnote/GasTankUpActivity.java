@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +33,7 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
 
     public static final String TITLE = "Nowe tankowanie";
     public static final String AUTO_DATA_NEW_TANK_UP = "AUTO DATA NEW TANK UP";
+    private static final String AUTO_DATA_OBJ = "AUTO DATA OBJ";
     private EditText dateEditText;
     private EditText mileageEditText;
     private EditText litersEditText;
@@ -51,8 +52,11 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gas_tank_up_layout);
+        obtainExtras();
+        if (savedInstanceState != null){
+            autoData = (AutoData) savedInstanceState.get(AUTO_DATA_OBJ);
+        }
         viewInit();
-        getIntence();
         setTitle(TITLE);
     }
 
@@ -214,7 +218,7 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void getIntence() {
+    private void obtainExtras() {
         autoData = (AutoData) Objects.requireNonNull(getIntent().getExtras()).getSerializable(MainMenuActivity.SPECIAL_DATA);
     }
 
@@ -249,6 +253,12 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
         dateFormat = DateFormat.getDateInstance();
         Date date = new Date();
         return dateFormat.format(date);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putSerializable(AUTO_DATA_OBJ, autoData);
+        super.onSaveInstanceState(outState);
     }
 
     @Override

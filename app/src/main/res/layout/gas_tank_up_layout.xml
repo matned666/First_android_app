@@ -21,14 +21,14 @@
 
             <TextView
                 android:id="@+id/date_label"
-                style="@style/comonEditTextStyleNoBottomMargin"
+                style="@style/commonEditTextStyleNoBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/date" />
 
             <EditText
                 android:id="@+id/date"
-                style="@style/comonEditTextStyleBottomMargin"
+                style="@style/commonEditTextStyleBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Date"
@@ -40,14 +40,14 @@
 
             <TextView
                 android:id="@+id/mileage_label"
-                style="@style/comonEditTextStyleNoBottomMargin"
+                style="@style/commonEditTextStyleNoBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/mileage" />
 
             <EditText
                 android:id="@+id/mileage"
-                style="@style/comonEditTextStyleBottomMargin"
+                style="@style/commonEditTextStyleBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Your car's actual mileage"
@@ -57,14 +57,14 @@
 
             <TextView
                 android:id="@+id/liters_label"
-                style="@style/comonEditTextStyleNoBottomMargin"
+                style="@style/commonEditTextStyleNoBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/tanked_gas_liters" />
 
             <EditText
                 android:id="@+id/liters"
-                style="@style/comonEditTextStyleBottomMargin"
+                style="@style/commonEditTextStyleBottomMargin"
                 android:autofillHints="Homw many liters did you tank?"
                 android:ems="10"
                 android:inputType="number"
@@ -72,12 +72,12 @@
 
             <TextView
                 android:id="@+id/cost_label"
-                style="@style/comonEditTextStyleNoBottomMargin"
+                style="@style/commonEditTextStyleNoBottomMargin"
                 android:text="@string/cost" />
 
             <EditText
                 android:id="@+id/cost"
-                style="@style/comonEditTextStyleBottomMargin"
+                style="@style/commonEditTextStyleBottomMargin"
                 android:autofillHints="Write money spent on this tanking"
                 android:ems="10"
                 android:inputType="number"
@@ -85,7 +85,7 @@
 
             <Button
                 android:id="@+id/confirm"
-                style="@style/comonEditTextStyleBottomAndTopMargin"
+                style="@style/commonEditTextStyleBottomAndTopMargin"
                 android:background="#1FCDBD"
                 android:text="@string/confirm"
                 android:textColor="#000000"

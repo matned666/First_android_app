@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#009688"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#02AA9A"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView9"
+                style="@style/commonEditTextStyleNoBottomMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/raport_title"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <Spinner
+                android:id="@+id/auto_choose_spinner2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#1FCDBD"
+                android:soundEffectsEnabled="true"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/commonEditTextStyleNoBottomMargin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/car_brand" />
+
+                <TextView
+                    android:id="@+id/carBrandTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/textView2"
+
+                    style="@style/textFieldRaportInformation"
+                    android:text="" />
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/commonEditTextStyleNoBottomMargin"
+                    android:layout_below="@id/carBrandTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/car_model" />
+
+                <TextView
+                    android:id="@+id/carModelTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/carBrandTextView"
+                    android:layout_toRightOf="@id/textView2"
+                    style="@style/textFieldRaportInformation"
+                    android:text=""
+                    android:layout_toEndOf="@id/textView2" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    style="@style/commonEditTextStyleNoBottomMargin"
+                    android:layout_below="@id/carModelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/registry_plates" />
+
+                <TextView
+                    android:id="@+id/carPlatesTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/carModelTextView"
+                    android:layout_toRightOf="@id/textView4"
+                    style="@style/textFieldRaportInformation"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    style="@style/commonEditTextStyleNoBottomMargin"
+                    android:layout_below="@id/carPlatesTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Color:" />
+
+                 <TextView
+                    android:id="@+id/carColorTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/carPlatesTextView"
+                    android:layout_toRightOf="@id/textView5"
+                    style="@style/textFieldRaportInformation"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/space1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/carColorTextView"/>
+
+                <TextView
+                    android:id="@+id/textView6"
+                    style="@style/commonEditTextStyleNoBottomMargin"
+                    android:layout_below="@id/space1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total costs:" />
+
+                <TextView
+                    android:id="@+id/carTotalCostsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/space1"
+                    android:layout_toRightOf="@id/textView6"
+                    style="@style/textFieldRaportInformation"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/raportTextView7"
+                    style="@style/commonEditTextStyleNoBottomMargin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/carTotalCostsTextView"
+                    android:layout_marginTop="0dp"
+                    android:text="Average monthly cost:" />
+
+                <TextView
+                    android:id="@+id/carMonthlyCostsTextView"
+                    style="@style/textFieldRaportInformation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/carTotalCostsTextView"
+                    android:layout_marginTop="0dp"
+                    android:layout_toRightOf="@id/raportTextView7"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/raportTextView8"
+                    style="@style/commonEditTextStyleNoBottomMargin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/carMonthlyCostsTextView"
+                    android:layout_marginTop="0dp"
+                    android:text="Pick month to check costs:" />
+
+                <EditText
+                    android:id="@+id/datePicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/carMonthlyCostsTextView"
+                    android:layout_toRightOf="@id/raportTextView8"
+                    android:layout_marginTop="0dp"
+                    android:ems="10"
+                    android:inputType="date"
+                    style="@style/textFieldPickerRaportInformation" />
+
+                <TextView
+                    android:id="@+id/raportTextView9"
+                    style="@style/commonEditTextStyleNoBottomMargin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/datePicker"
+                    android:layout_marginTop="0dp"
+                    android:text="Chosen month costs:" />
+
+                <TextView
+                    android:id="@+id/carChosenMonthCostsTextView"
+                    style="@style/textFieldRaportInformation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/datePicker"
+                    android:layout_marginTop="0dp"
+                    android:layout_toRightOf="@id/raportTextView9"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/raportTextView10"
+                    style="@style/commonEditTextStyleNoBottomMargin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/carChosenMonthCostsTextView"
+                    android:layout_marginTop="0dp"
+                    android:text="Pick day to check costs:" />
+
+                <EditText
+                    android:id="@+id/dateDayPicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/carChosenMonthCostsTextView"
+                    android:layout_toRightOf="@id/raportTextView10"
+                    android:layout_marginTop="0dp"
+                    android:ems="10"
+                    android:inputType="date"
+                    style="@style/textFieldPickerRaportInformation" />
+
+                <TextView
+                    android:id="@+id/raportTextView11"
+                    style="@style/commonEditTextStyleNoBottomMargin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/dateDayPicker"
+                    android:layout_marginTop="0dp"
+                    android:text="Chosen day costs:" />
+
+                <TextView
+                    android:id="@+id/carChosenDayCostsTextView"
+                    style="@style/textFieldRaportInformation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:layout_below="@+id/dateDayPicker"
+                    android:layout_toRightOf="@id/raportTextView11"
+                    android:text="" />
+
+
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/goToDetailedRaportButton"
+                style="@style/commonEditTextStyleBottomAndTopMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="See detailed car raport"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/confirm"
+                style="@style/commonEditTextStyleBottomAndTopMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save detailed raport to PDF"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:contentDescription="@string/car_logo"
+        android:tint="#0A7369"
+        app:srcCompat="@drawable/ic_logo" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:gravity="end"
+        android:text="@string/made_by_sign"
+        android:textAlignment="center"
+        android:textStyle="italic"
+        tools:ignore="RtlCompat" />
+
+</LinearLayout>

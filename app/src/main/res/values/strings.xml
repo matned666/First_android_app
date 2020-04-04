@@ -10,18 +10,26 @@
     <string name="model_label">Model:</string>
     <string name="color_label">Color:</string>
     <string name="plates_label">Plates:</string>
-    <string name="new_tank_up">New tank up</string>
-    <string name="new_collision">New collision</string>
-    <string name="new_repair">New repair</string>
+    <string name="new_tank_up">Tank up</string>
+    <string name="new_collision">Collision</string>
+    <string name="new_repair">Repair</string>
     <string name="made_by_sign">Made by MRNDesign.eu   </string>
-    <string name="add_new_car">Cars setup</string>
+    <string name="add_new_car">Fleet</string>
     <string name="car_logo">Car logo</string>
     <string name="is_it_your_default_car">Is it your default car?</string>
     <string name="remove_car">Remove car</string>
-    <string name="settings">settings</string>
-    <string name="raport">Costs raport</string>
-    <string name="add_insurance">static costs</string>
+    <string name="settings">Settings</string>
+    <string name="raport">Raport</string>
+    <string name="add_insurance">Costs</string>
     <string name="edit_car">Edit car</string>
     <string name="add_car">add car</string>
+    <string name="description">Description:</string>
+    <string name="new_repair_title">NEW REPAIR</string>
+    <string name="additional_cost">ADDITIONAL COST</string>
+    <string name="new_collision_title">NEW COLLISION</string>
+    <string name="raport_title">RAPORT</string>
+    <string name="car_brand">Car brand:</string>
+    <string name="car_model">Car model:</string>
+    <string name="registry_plates">Registry plates:</string>
 
 </resources>

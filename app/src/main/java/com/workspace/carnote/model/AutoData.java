@@ -1,19 +1,12 @@
 package com.workspace.carnote.model;
 
-import android.os.Parcelable;
-
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AutoData implements Serializable {
-
-    /**
-     * Model: ex. Golf
-     * Brand: ex. VolksWagen
-     */
+public class AutoData implements Serializable{
 
     private String model;
     private String brand;
@@ -33,9 +26,6 @@ public class AutoData implements Serializable {
 
     public List<TankUpRecord> getTankUpRecord() {
         return tankUpRecord;
-    }
-    public void setTankUpRecord(List<TankUpRecord> tankUpRecord) {
-        this.tankUpRecord = tankUpRecord;
     }
 
     public String getModel() {
@@ -69,7 +59,7 @@ public class AutoData implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        return brand+" "+model+" "+color+" "+plates;
+        return brand+", "+model+", "+color+", "+plates;
     }
 
     public static class Builder {

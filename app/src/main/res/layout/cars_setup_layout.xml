@@ -41,7 +41,7 @@
 
             <Button
                 android:id="@+id/go_to_add_car_form_btn"
-                style="@style/comonEditTextStyleBottomMargin"
+                style="@style/commonEditTextStyleBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#1FCDBD"
@@ -53,7 +53,7 @@
 
             <Button
                 android:id="@+id/go_to_remove_car_form_btn"
-                style="@style/comonEditTextStyleBottomMargin"
+                style="@style/commonEditTextStyleBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#1FCDBD"
@@ -64,7 +64,7 @@
 
             <Button
                 android:id="@+id/go_to_edit_car_form_btn"
-                style="@style/comonEditTextStyleBottomMargin"
+                style="@style/commonEditTextStyleBottomMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#1FCDBD"
@@ -80,6 +80,15 @@
                 android:contentDescription="@string/car_logo"
                 android:tint="#0A7369"
                 app:srcCompat="@drawable/ic_logo" />
+
+            <Button
+                android:id="@+id/confirm_cars_changes_btn"
+                style="@style/commonEditTextStyleBottomAndTopMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#1FCDBD"
+                android:text="@string/confirm"
+                tools:targetApi="lollipop" />
 
             <TextView
                 android:id="@+id/textView25"
