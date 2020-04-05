@@ -38,21 +38,18 @@ public class CarSetupActivity extends AppCompatActivity {
 
     private Spinner autoChooseSpinner;
     private ArrayList<AutoData> cars;
-    private ArrayAdapter<AutoData> arrayAdapter;
+    private ArrayAdapter arrayAdapter;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cars_setup_layout);
-        cars = new ArrayList<>();
         getIntence();
-        initAutoList_cars();
+//        initAutoList_cars();
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cars);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         initArrayAdapter();
-
-        //TODO nie można wybrać auta - coś się zjebało
 
         addCarButton = findViewById(R.id.go_to_add_car_form_btn);
         removeCarButton = findViewById(R.id.go_to_remove_car_form_btn);
@@ -65,15 +62,16 @@ public class CarSetupActivity extends AppCompatActivity {
         confirm.setOnClickListener(confirmFormActivity());
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        editor.putString(AUTO_PREF, gson.toJson(cars));
-        editor.apply();
-    }
+    //TODO ----> Saving in case of activity close TO BE REDONE
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        Gson gson = new Gson();
+//        editor.putString(AUTO_PREF, gson.toJson(cars));
+//        editor.apply();
+//    }
 
     @Override
     public void onBackPressed() {
@@ -92,6 +90,7 @@ public class CarSetupActivity extends AppCompatActivity {
 
     private void getOutgoingIntent(Intent intent) {
         intent.putExtra("PUT CARS", GsonQuest.make(cars));
+        System.out.println(GsonQuest.make(cars));
         setResult(Activity.RESULT_OK, intent);
     }
 
@@ -99,17 +98,17 @@ public class CarSetupActivity extends AppCompatActivity {
         cars = GsonQuest.getList((String) Objects.requireNonNull(getIntent().getExtras()).get(MainMenuActivity.GIVE_CARS_LIST));
     }
 
-    private void initAutoList_cars() {
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        String string = sharedPreferences.getString(AUTO_PREF, null);
-        Gson gson = new Gson();
-        ArrayList<AutoData> newCarsList = gson.fromJson(string, new TypeToken<ArrayList<AutoData>>() {
-        }.getType());
-
-        if (newCarsList != null){
-            cars = newCarsList;
-        } else cars = new ArrayList<>();
-    }
+//    private void initAutoList_cars() {
+//        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+//        String string = sharedPreferences.getString(AUTO_PREF, null);
+//        Gson gson = new Gson();
+//        ArrayList<AutoData> newCarsList = gson.fromJson(string, new TypeToken<ArrayList<AutoData>>() {
+//        }.getType());
+//
+//        if (newCarsList == null){
+//            cars = newCarsList;
+//        }
+//    }
 
     private void initArrayAdapter() {
 

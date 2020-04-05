@@ -7,61 +7,61 @@ import java.util.Date;
  * Single tank data model
  */
 
-public class TankUpRecord implements Serializable {
+public class Record implements Serializable {
 
-    private Date tankUpDate;
+    private RecordType recordType;
+    private Date date;
     private Integer mileage;
     private Integer tankedUpGasLiters;
     private Integer costInPLN;
+    private String description;
 
-    public TankUpRecord(Builder builder) {
-        this.tankUpDate = builder.tankUpDate;
+    private Record(Builder builder) {
+        this.recordType = builder.recordType;
+        this.date = builder.date;
         this.mileage = builder.mileage;
         this.tankedUpGasLiters = builder.tankedUpGasLiters;
         this.costInPLN = builder.costInPLN;
+        this.description = builder.description;
     }
 
-    public Date getTankUpDate() {
-        return tankUpDate;
+    public RecordType getRecordType() {
+        return recordType;
     }
-    public void setTankUpDate(Date tankUpDate) {
-        this.tankUpDate = tankUpDate;
+
+    public Date getDate() {
+        return date;
     }
 
     public Integer getMileage() {
         return mileage;
     }
-    public void setMileage(Integer mileage) {
-        this.mileage = mileage;
-    }
 
     public Integer getTankedUpGasLiters() {
         return tankedUpGasLiters;
-    }
-    public void setTankedUpGasLiters(Integer tankedUpGasLiters) {
-        this.tankedUpGasLiters = tankedUpGasLiters;
     }
 
     public Integer getCostInPLN() {
         return costInPLN;
     }
-    public void setCostInPLN(Integer costInPLN) {
-        this.costInPLN = costInPLN;
+
+    public String getDescription() {
+        return description;
     }
 
+
     public static class Builder{
-        private Date tankUpDate;
+
+        private RecordType recordType;
+        private Date date;
         private Integer mileage;
         private Integer tankedUpGasLiters;
         private Integer costInPLN;
+        private String description;
 
-        public Builder() {
-
-        }
-
-        public Builder tankUpDate(Date tankUpDate){
-            this.tankUpDate = tankUpDate;
-            return this;
+        public Builder(RecordType recordType, Date date) {
+            this.recordType = recordType;
+            this.date = date;
         }
 
         public Builder mileage (Integer mileage){
@@ -79,10 +79,17 @@ public class TankUpRecord implements Serializable {
             return this;
         }
 
-        public TankUpRecord build(){
-            return new TankUpRecord(this);
+        public Builder description (String description){
+            this.description = description;
+            return this;
+        }
+
+        public Record build(){
+            return new Record(this);
         }
 
     }
+
+    // unused Abstract methods
 
 }

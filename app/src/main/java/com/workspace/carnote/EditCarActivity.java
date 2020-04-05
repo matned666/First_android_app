@@ -118,7 +118,7 @@ public class EditCarActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private boolean validate(EditText editText, TextView textView, String backText) {
         String text = editText.getText().toString();
-            if (text.equals("")) {
+            if (text.trim().equals("")) {
                 textView.setText("Type something");
                 textView.setTextColor(Color.parseColor("#ff0000"));
                 return false;

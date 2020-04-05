@@ -19,11 +19,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.workspace.carnote.model.AutoData;
 import com.workspace.carnote.model.GsonQuest;
 import com.workspace.carnote.model.HistoryAdapter;
-import com.workspace.carnote.model.TankUpRecord;
+import com.workspace.carnote.model.Record;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -36,6 +37,9 @@ public class MainMenuActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_AddCarFormActivity = 12344;
     private static final int REQUEST_CODE_CarFormActivity = 12345;
     private static final int REQUEST_CODE_tankUpActivity = 12346;
+    public static final int REQUEST_CODE_repair = 12347;
+    public static final int REQUEST_CODE_collision = 12348;
+    public static final int REQUEST_CODE_costs = 12349;
 
     private Button goToTankFormButton;
     private Button goRepairFormButton;
@@ -128,8 +132,21 @@ public class MainMenuActivity extends AppCompatActivity {
         });
     }
 
+    private void initAutoList_cars() {
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        String string = sharedPreferences.getString(AUTO_PREF, null);
+
+        Gson gson = new Gson();
+        ArrayList<AutoData> newCarsList = gson.fromJson(string, new TypeToken<ArrayList<AutoData>>() {
+        }.getType());
+
+        if (newCarsList != null){
+            cars = newCarsList;
+        } else cars = new ArrayList<>();
+    }
+
     private void addNewCarTankUpRecordsList() {
-        historyAdapter = new HistoryAdapter(this, getCurrentCar() != null ? getCurrentCar().getTankUpRecord() : new ArrayList<TankUpRecord>());
+        historyAdapter = new HistoryAdapter(this, getCurrentCar() != null ? getCurrentCar().getRecords() : new ArrayList<Record>());
         historyRecyclerView.setAdapter(historyAdapter);
     }
 
@@ -148,7 +165,7 @@ public class MainMenuActivity extends AppCompatActivity {
         } else if (requestCode == REQUEST_CODE_tankUpActivity) {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
-                    getCurrentCar().getTankUpRecord().add(0,(TankUpRecord) data.getExtras().get(GasTankUpActivity.AUTO_DATA_NEW_TANK_UP));
+                    getCurrentCar().getRecords().add(0,(Record) data.getExtras().get(GasTankUpActivity.AUTO_DATA_NEW_TANK_UP));
                 }
             }
         }
@@ -170,11 +187,28 @@ public class MainMenuActivity extends AppCompatActivity {
                     autoChooseSpinner.setSelection(cars.size()-1, false);
                 }
             }
+        }else if (requestCode == REQUEST_CODE_repair) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    getCurrentCar().getRecords().add(0,(Record) data.getExtras().get(RepairActivity.AUTO_DATA));
+                }
+            }
+        }else if (requestCode == REQUEST_CODE_collision) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    getCurrentCar().getRecords().add(0,(Record) data.getExtras().get(RepairActivity.AUTO_DATA));
+                }
+            }
+        }else if (requestCode == REQUEST_CODE_costs) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    getCurrentCar().getRecords().add(0,(Record) data.getExtras().get(RepairActivity.AUTO_DATA));
+                }
+            }
         }
         historyAdapter.notifyDataSetChanged();
-
-
     }
+
 
     private View.OnClickListener goToCarFormActivity() {
         return v -> {
@@ -187,14 +221,16 @@ public class MainMenuActivity extends AppCompatActivity {
     private View.OnClickListener goToAdditionalCostsFormActivity() {
         return v -> {
             Intent intent = new Intent(MainMenuActivity.this, AdditionalCostsActivity.class);
-            startActivity(intent);
+            intent.putExtra(SPECIAL_DATA, getCurrentCar());
+            startActivityForResult(intent, REQUEST_CODE_costs);
         };
     }
 
     private View.OnClickListener goToCollisionFormActivity() {
         return v -> {
             Intent intent = new Intent(MainMenuActivity.this, CollisionActivity.class);
-            startActivity(intent);
+            intent.putExtra(SPECIAL_DATA, getCurrentCar());
+            startActivityForResult(intent, REQUEST_CODE_collision);
 
         };
     }
@@ -210,7 +246,8 @@ public class MainMenuActivity extends AppCompatActivity {
     private View.OnClickListener goToRepairFormActivity() {
         return v -> {
             Intent intent = new Intent(MainMenuActivity.this, RepairActivity.class);
-            startActivity(intent);
+            intent.putExtra(SPECIAL_DATA, getCurrentCar());
+            startActivityForResult(intent, REQUEST_CODE_repair);
 
         };
     }
@@ -231,19 +268,8 @@ public class MainMenuActivity extends AppCompatActivity {
         };
     }
 
-    private void initAutoList_cars() {
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        String string = sharedPreferences.getString(AUTO_PREF, null);
-        Gson gson = new Gson();
-        ArrayList<AutoData> newCarsList = gson.fromJson(string, new TypeToken<ArrayList<AutoData>>() {
-        }.getType());
-
-        if (newCarsList != null){
-            cars = newCarsList;
-        } else cars = new ArrayList<>();
-    }
-
     private AutoData getCurrentCar() {
         return (AutoData) autoChooseSpinner.getSelectedItem();
     }
+
 }

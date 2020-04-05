@@ -20,7 +20,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.workspace.carnote.model.AutoData;
-import com.workspace.carnote.model.TankUpRecord;
+import com.workspace.carnote.model.Record;
+import com.workspace.carnote.model.RecordType;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -109,11 +110,11 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
             if (validateMileage()
                     && validate(litersEditText, litersTextLabel,getResources().getString(R.string.tanked_gas_liters))
                     && validate(costEditText, costTextLabel,getResources().getString(R.string.cost))) {
-                TankUpRecord tank = new TankUpRecord.Builder()
-                        .tankUpDate(getDate())
+                Record tank = new Record.Builder(RecordType.TANK_UP, getDate())
                         .mileage(getMileage())
                         .tankedUpGasLiters(getLiters())
                         .costInPLN(getCost())
+                        .description("")
                         .build();
                 Intent intent = new Intent();
                 intent.putExtra(AUTO_DATA_NEW_TANK_UP, tank);
@@ -177,11 +178,19 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
 
     @SuppressLint("SetTextI18n")
     private boolean validateMileage() {
+        Integer oldMileage = 0;
+        for(int i =0; i < autoData.getRecords().size(); i++) {
+             if(autoData.getRecords().get(i).getRecordType() == RecordType.TANK_UP)   {
+                 oldMileage = autoData.getRecords().get(i).getMileage();
+                 break;
+             }
+        }
             if (!mileageEditText.getText().toString().equals("")) {
-                int size = autoData.getTankUpRecord().size();
-                if (autoData.getTankUpRecord().size() != 0) {
+                int size = autoData.getRecords().size();
+                if (autoData.getRecords().size() != 0) {
                     Integer newMileage = Integer.valueOf(mileageEditText.getText().toString());
-                    Integer oldMileage = autoData.getTankUpRecord().get(size - 1).getMileage();
+
+
                     if (newMileage <= oldMileage) {
                         mileageErrorChange();
                         return false;

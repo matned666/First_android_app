@@ -22,13 +22,13 @@ import java.util.List;
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
     private Context context;
-    private List<TankUpRecord> tankList;
-    TankUpRecord tankUpRecord;
+    private List<Record> recordsList;
+    private Record record;
     private Drawable drawable;
 
-    public HistoryAdapter(Context context, List<TankUpRecord> tankList) {
+    public HistoryAdapter(Context context, List<Record> recordsList) {
         this.context = context;
-        this.tankList = tankList;
+        this.recordsList = recordsList;
     }
 
     @NonNull
@@ -41,18 +41,45 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        tankUpRecord = tankList.get(position);
-        drawable = context.getResources().getDrawable(R.drawable.ic_local_gas_station);
-        holder.activityImageView.setImageDrawable(drawable);
-        DateFormat dateFormat = DateFormat.getDateInstance();
-        holder.historyTextViewTopLeft.setText(dateFormat.format(tankUpRecord.getTankUpDate()));
-        holder.historyTextViewTopRight.setText("Mileage: "+tankUpRecord.getMileage().toString()+" km");
-        holder.historyTextViewBottomLeft.setText("Tanked: "+tankUpRecord.getTankedUpGasLiters().toString()+" L");
-        holder.historyTextViewBottomRight.setText("for: "+tankUpRecord.getCostInPLN().toString()+" PLN");
-         holder.deleteItemImageView.setOnClickListener(v -> {
-            confirmCarRemoveDialog(position);
-         });
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        record = recordsList.get(position);
+        if(record.getRecordType() == RecordType.TANK_UP) {
+            drawable = context.getResources().getDrawable(R.drawable.ic_local_gas_station);
+            holder.activityImageView.setImageDrawable(drawable);
+            DateFormat dateFormat = DateFormat.getDateInstance();
+            holder.historyTextViewTopLeft.setText(dateFormat.format(record.getDate()));
+            holder.historyTextViewTopRight.setText("Mileage: " + record.getMileage().toString() + " km");
+            holder.historyTextViewBottomLeft.setText("Tanked: " + record.getTankedUpGasLiters().toString() + " L");
+            holder.historyTextViewBottomRight.setText("for: " + record.getCostInPLN().toString() + " PLN");
+        }else if(record.getRecordType() == RecordType.COLLISION) {
+            drawable = context.getResources().getDrawable(R.drawable.ic_history_collision);
+            holder.activityImageView.setImageDrawable(drawable);
+            DateFormat dateFormat = DateFormat.getDateInstance();
+            holder.historyTextViewTopLeft.setText(dateFormat.format(record.getDate()));
+            holder.historyTextViewTopRight.setText("COLLISION");
+            holder.historyTextViewBottomLeft.setText("Cost: " + record.getCostInPLN().toString() + " PLN");
+            holder.historyTextViewBottomRight.setText(record.getDescription());
+        }else if(record.getRecordType() == RecordType.REPAIR) {
+            drawable = context.getResources().getDrawable(R.drawable.ic_history_repair);
+            holder.activityImageView.setImageDrawable(drawable);
+            DateFormat dateFormat = DateFormat.getDateInstance();
+            holder.historyTextViewTopLeft.setText(dateFormat.format(record.getDate()));
+            holder.historyTextViewTopRight.setText("REPAIR");
+            holder.historyTextViewBottomLeft.setText("Cost: " + record.getCostInPLN().toString() + " PLN");
+            holder.historyTextViewBottomRight.setText(record.getDescription());
+        }else if(record.getRecordType() == RecordType.COST) {
+            drawable = context.getResources().getDrawable(R.drawable.ic_history_cost);
+            holder.activityImageView.setImageDrawable(drawable);
+            DateFormat dateFormat = DateFormat.getDateInstance();
+            holder.historyTextViewTopLeft.setText(dateFormat.format(record.getDate()));
+            holder.historyTextViewTopRight.setText("ADDITIONAL COST");
+            holder.historyTextViewBottomLeft.setText("Cost: " + record.getCostInPLN().toString() + " PLN");
+            holder.historyTextViewBottomRight.setText(record.getDescription());
+        }
+            holder.deleteItemImageView.setOnClickListener(v -> {
+                confirmCarRemoveDialog(position);
+            });
+
     }
 
     private void confirmCarRemoveDialog(int position) {
@@ -68,7 +95,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
                 .setNegativeButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,int id) {
-                        tankList.remove(position);
+                        recordsList.remove(position);
                         HistoryAdapter.this.notifyDataSetChanged();
                     }
                 })
@@ -77,8 +104,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        if(tankList == null) return 0;
-        else return tankList.size();
+        if(recordsList == null) return 0;
+        else return recordsList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

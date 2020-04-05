@@ -13,7 +13,7 @@ public class AutoData implements Serializable{
     private String color;
     private String plates;
 
-    private List<TankUpRecord> tankUpRecord;
+    private List<Record> Records;
 
 
     private AutoData(Builder builder) {
@@ -21,11 +21,11 @@ public class AutoData implements Serializable{
         this.brand = builder.brand;
         this.color = builder.color;
         this.plates = builder.plates;
-        tankUpRecord = new LinkedList<>();
+        Records = new LinkedList<>();
     }
 
-    public List<TankUpRecord> getTankUpRecord() {
-        return tankUpRecord;
+    public List<Record> getRecords() {
+        return Records;
     }
 
     public String getModel() {
