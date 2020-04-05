@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.workspace.carnote.model.AutoData;
 import com.workspace.carnote.model.GsonQuest;
 
@@ -26,6 +29,7 @@ public class CarSetupActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_AddCarFormActivity = 123;
     public static final String AUTO_PREF = "AUTO_PREF";
+    public static final int REQUEST_CODE_EditCarFormActivity =124;
 
     private Button addCarButton;
     private Button removeCarButton;
@@ -33,7 +37,7 @@ public class CarSetupActivity extends AppCompatActivity {
     private Button confirm;
 
     private Spinner autoChooseSpinner;
-    private ArrayList cars;
+    private ArrayList<AutoData> cars;
     private ArrayAdapter<AutoData> arrayAdapter;
 
 
@@ -43,9 +47,11 @@ public class CarSetupActivity extends AppCompatActivity {
         setContentView(R.layout.cars_setup_layout);
         cars = new ArrayList<>();
         getIntence();
+        initAutoList_cars();
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cars);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         initArrayAdapter();
-        autoChooseSpinner = findViewById(R.id.auto_choose_spinner);
-        autoChooseSpinner.setAdapter(arrayAdapter);
+
         //TODO nie można wybrać auta - coś się zjebało
 
         addCarButton = findViewById(R.id.go_to_add_car_form_btn);
@@ -55,7 +61,18 @@ public class CarSetupActivity extends AppCompatActivity {
 
         addCarButton.setOnClickListener(goToAddCarFormActivity());
         removeCarButton.setOnClickListener(goToRemoveCarFormActivity());
+        editCarButton.setOnClickListener(goToEditCarFormActivity());
         confirm.setOnClickListener(confirmFormActivity());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        editor.putString(AUTO_PREF, gson.toJson(cars));
+        editor.apply();
     }
 
     @Override
@@ -69,6 +86,7 @@ public class CarSetupActivity extends AppCompatActivity {
         return v -> {
             Intent intent = new Intent();
             getOutgoingIntent(intent);
+            finish();
         };
     }
 
@@ -79,6 +97,24 @@ public class CarSetupActivity extends AppCompatActivity {
 
     private void getIntence() {
         cars = GsonQuest.getList((String) Objects.requireNonNull(getIntent().getExtras()).get(MainMenuActivity.GIVE_CARS_LIST));
+    }
+
+    private void initAutoList_cars() {
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        String string = sharedPreferences.getString(AUTO_PREF, null);
+        Gson gson = new Gson();
+        ArrayList<AutoData> newCarsList = gson.fromJson(string, new TypeToken<ArrayList<AutoData>>() {
+        }.getType());
+
+        if (newCarsList != null){
+            cars = newCarsList;
+        } else cars = new ArrayList<>();
+    }
+
+    private void initArrayAdapter() {
+
+        autoChooseSpinner = findViewById(R.id.auto_choose_spinner);
+        autoChooseSpinner.setAdapter(arrayAdapter);
     }
 
     private View.OnClickListener goToAddCarFormActivity() {
@@ -104,7 +140,11 @@ public class CarSetupActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(getCurrentCar() != null) {
+                    Intent intent = new Intent(CarSetupActivity.this, EditCarActivity.class);
+                    intent.putExtra("CURRENT_CAR", getCurrentCar());
+                    startActivityForResult(intent, REQUEST_CODE_EditCarFormActivity);
+                }
             }
         };
     }
@@ -124,11 +164,30 @@ public class CarSetupActivity extends AppCompatActivity {
                 }
             }
         }
+    if (requestCode == REQUEST_CODE_EditCarFormActivity) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    AutoData editedCarData = (AutoData) Objects.requireNonNull(data.getExtras()).get(EditCarActivity.AUTO_DATA_EDITED_CAR);
+                    Boolean isTheCarDefaultCar = (Boolean) data.getExtras().get(EditCarActivity.IS_THE_CAR_DEFAULT);
+
+                    if (isTheCarDefaultCar != null && isTheCarDefaultCar)
+                        setCurrentCar(true, editedCarData);
+                    else setCurrentCar(false, editedCarData);
+
+                }
+            }
+        }
+        initArrayAdapter();
+
     }
 
-    private void initArrayAdapter() {
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cars);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    private void setCurrentCar(boolean b, AutoData editedCarData) {
+        cars.remove(getCurrentCar());
+        if (b){
+            cars.add(0, editedCarData);
+        }else{
+            cars.add(editedCarData);
+        }
     }
 
     private AutoData getCurrentCar() {
@@ -142,6 +201,7 @@ public class CarSetupActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         cars.remove(getCurrentCar());
+                        initArrayAdapter();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

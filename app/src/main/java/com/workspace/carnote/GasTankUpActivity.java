@@ -104,64 +104,51 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
     }
 
     private void addOnClickListener_ToConfirmButton() {
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        confirmButton.setOnClickListener(v -> {
 
-                if (validateMileage() && validate(litersEditText, litersTextLabel) && validate(costEditText, costTextLabel)) {
-                    TankUpRecord tank = new TankUpRecord.Builder()
-                            .tankUpDate(getDate())
-                            .mileage(getMileage())
-                            .tankedUpGasLiters(getLiters())
-                            .costInPLN(getCost())
-                            .build();
-                    Intent intent = new Intent();
-                    intent.putExtra(AUTO_DATA_NEW_TANK_UP, tank);
-                    setResult(Activity.RESULT_OK, intent);
-                    finish();
-                }
+            if (validateMileage()
+                    && validate(litersEditText, litersTextLabel,getResources().getString(R.string.tanked_gas_liters))
+                    && validate(costEditText, costTextLabel,getResources().getString(R.string.cost))) {
+                TankUpRecord tank = new TankUpRecord.Builder()
+                        .tankUpDate(getDate())
+                        .mileage(getMileage())
+                        .tankedUpGasLiters(getLiters())
+                        .costInPLN(getCost())
+                        .build();
+                Intent intent = new Intent();
+                intent.putExtra(AUTO_DATA_NEW_TANK_UP, tank);
+                setResult(Activity.RESULT_OK, intent);
+                finish();
             }
         });
     }
 
     private void addOnFocusChangeListenerTo_Mileage_TextField() {
-        mileageEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @SuppressLint({"ResourceType", "SetTextI18n"})
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    validateMileage();
-                }
+        mileageEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                validateMileage();
             }
         });
     }
 
     private void addOnFocusChangeListenerTo_Liters_TextField() {
-        litersEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @SuppressLint({"ResourceType", "SetTextI18n"})
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    validate(litersEditText, litersTextLabel);
-                }
+        litersEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                validate(litersEditText, litersTextLabel, getResources().getString(R.string.tanked_gas_liters));
             }
         });
     }
 
     private void addOnFocusChangeListenerTo_Cost_TextField() {
-        costEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @SuppressLint({"ResourceType", "SetTextI18n"})
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    validate(costEditText, costTextLabel);
-                }
+        costEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                validate(costEditText, costTextLabel, getResources().getString(R.string.cost));
             }
         });
     }
 
     @SuppressLint("SetTextI18n")
-    private boolean validate(EditText editText, TextView textView) {
+    private boolean validate(EditText editText, TextView textView, String backText) {
         boolean isNumeric;
         int cost = 0;
         try {
@@ -175,7 +162,7 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
                 textView.setText("Value must be higher than 0 !");
                 textView.setTextColor(Color.parseColor("#ff0000"));
             } else {
-                textView.setText(getResources().getString(R.string.cost));
+                textView.setText(backText);
                 textView.setTextColor(Color.parseColor("#000000"));
                 return true;
             }

@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.workspace.carnote.MainMenuActivity;
 import com.workspace.carnote.R;
 
 import java.text.DateFormat;

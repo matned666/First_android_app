@@ -57,7 +57,6 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu_layout);
-
         initView();
     }
 
@@ -69,23 +68,18 @@ public class MainMenuActivity extends AppCompatActivity {
         Gson gson = new Gson();
         editor.putString(AUTO_PREF, gson.toJson(cars));
         editor.apply();
-
     }
 
     private void initView() {
         initializeButtons();
         initializeButtonActions();
-
         initAutoList_cars();
         initArrayAdapter();
         initRecycleView();
-
-
         if(cars.isEmpty()){
             Intent intent = new Intent(MainMenuActivity.this, AddCarActivity.class);
             startActivityForResult(intent, REQUEST_CODE_AddCarFormActivity);
         }
-
     }
 
     private void initializeButtons() {
@@ -149,9 +143,6 @@ public class MainMenuActivity extends AppCompatActivity {
                     cars = GsonQuest.getList((String) Objects.requireNonNull(data.getExtras()).get("PUT CARS"));
                     initArrayAdapter();
                     addNewCarTankUpRecordsList();
-
-//TODO dane z add car gubią się w main menu
-
                 }
             }
         } else if (requestCode == REQUEST_CODE_tankUpActivity) {
