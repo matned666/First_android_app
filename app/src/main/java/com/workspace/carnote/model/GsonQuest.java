@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GsonQuest {
 
-    public static ArrayList getList(String gsonStr){
+    public static ArrayList<AutoData> getList(String gsonStr){
         Gson gson = new Gson();
         return gson.fromJson(gsonStr, new TypeToken<ArrayList<AutoData>>() {
         }.getType());

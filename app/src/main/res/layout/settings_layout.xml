@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="#009688"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:screenOrientation="portrait">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -41,22 +42,6 @@
                 android:id="@+id/textView11"
                 android:layout_width="match_parent"
                 android:layout_height="10dp" />
-
-            <Button
-                android:id="@+id/confirm"
-                style="@style/commonEditTextStyleBottomAndTopMargin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="NEW COMPANY" />
-
-            <Button
-                android:id="@+id/confirm5"
-                style="@style/commonEditTextStyleBottomAndTopMargin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="LOAD COMPANY"
-                android:textSize="20dp" />
 
         </LinearLayout>
     </ScrollView>
