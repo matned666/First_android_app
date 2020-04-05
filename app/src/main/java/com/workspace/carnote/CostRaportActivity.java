@@ -116,8 +116,10 @@ public class CostRaportActivity extends AppCompatActivity  implements DatePicker
 
     private void initializeData() {
         getCarData();
-        getTotalCosts();
-        getAverageMonthlyCost();
+        if(getCurrentCar().getRecords().size() > 0) {
+            getTotalCosts();
+            getAverageMonthlyCost();
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -139,8 +141,8 @@ public class CostRaportActivity extends AppCompatActivity  implements DatePicker
     private void getAverageMonthlyCost() {
         double totalCost = getTotalCostInner();
         double months = getMonthlyCostsList().size();
-        double averageCosts;
-        if (months != 0) averageCosts = totalCost / months;
+        int averageCosts;
+        if (months != 0) averageCosts = (int) (totalCost / months);
         else averageCosts = 0;
         averageCostTextView.setText(averageCosts+" PLN");
     }
@@ -219,7 +221,6 @@ public class CostRaportActivity extends AppCompatActivity  implements DatePicker
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat(format);
         return dateFormat.format(date);
     }
-
 
     private void datePickDialog() {
         Calendar calendar = Calendar.getInstance();
