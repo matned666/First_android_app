@@ -78,18 +78,10 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
         costTextLabel = findViewById(R.id.cost_label);
 
         dateEditText = findViewById(R.id.date);
-        dateEditText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                datePickDialog();
-            }
-        });
+        dateEditText.setOnClickListener(v -> datePickDialog());
         dateEditText.setRawInputType(InputType.TYPE_NULL);
-        dateEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) datePickDialog();
-            }
+        dateEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) datePickDialog();
         });
         dateEditText.setText(getCurrentDate());
         confirmButton = findViewById(R.id.confirm);

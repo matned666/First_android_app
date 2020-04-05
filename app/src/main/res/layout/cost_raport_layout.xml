@@ -31,6 +31,15 @@
                 android:textAlignment="center"
                 android:textSize="30sp" />
 
+            <Spinner
+                android:id="@+id/raport_auto_choose_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="23dp"
+                android:background="#1FCDBD"
+                android:soundEffectsEnabled="true"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="match_parent"
@@ -124,8 +133,8 @@
                 <TextView
                     android:id="@+id/space1"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_below="@id/carColorTextView"/>
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/carColorTextView" />
 
                 <TextView
                     android:id="@+id/textView6"
@@ -170,10 +179,10 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/carMonthlyCostsTextView"
                     android:layout_marginTop="0dp"
-                    android:text="Pick month to check costs:" />
+                    android:text="Pick date to check costs:" />
 
                 <EditText
-                    android:id="@+id/datePicker"
+                    android:id="@+id/dateMonthPicker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/carMonthlyCostsTextView"
@@ -188,7 +197,7 @@
                     style="@style/commonEditTextStyleNoBottomMargin"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/datePicker"
+                    android:layout_below="@+id/dateMonthPicker"
                     android:layout_marginTop="0dp"
                     android:text="Chosen month costs:" />
 
@@ -197,38 +206,22 @@
                     style="@style/textFieldRaportInformation"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/datePicker"
+                    android:layout_below="@+id/dateMonthPicker"
                     android:layout_marginTop="0dp"
                     android:layout_toRightOf="@id/raportTextView9"
                     android:text="" />
-
-                <TextView
-                    android:id="@+id/raportTextView10"
-                    style="@style/commonEditTextStyleNoBottomMargin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/carChosenMonthCostsTextView"
-                    android:layout_marginTop="0dp"
-                    android:text="Pick day to check costs:" />
-
-                <EditText
-                    android:id="@+id/dateDayPicker"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/carChosenMonthCostsTextView"
-                    android:layout_toRightOf="@id/raportTextView10"
-                    android:layout_marginTop="0dp"
-                    android:ems="10"
-                    android:inputType="date"
-                    style="@style/textFieldPickerRaportInformation" />
 
                 <TextView
                     android:id="@+id/raportTextView11"
                     style="@style/commonEditTextStyleNoBottomMargin"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/dateDayPicker"
-                    android:layout_marginTop="0dp"
+                    android:layout_below="@+id/raportTextView9"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginStart="9dp"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginTop="19dp"
                     android:text="Chosen day costs:" />
 
                 <TextView
@@ -236,8 +229,8 @@
                     style="@style/textFieldRaportInformation"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="0dp"
-                    android:layout_below="@+id/dateDayPicker"
+                    android:layout_below="@+id/carChosenMonthCostsTextView"
+                    android:layout_marginTop="8dp"
                     android:layout_toRightOf="@id/raportTextView11"
                     android:text="" />
 

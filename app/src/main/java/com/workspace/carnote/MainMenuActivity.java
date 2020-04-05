@@ -40,6 +40,7 @@ public class MainMenuActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_repair = 12347;
     public static final int REQUEST_CODE_collision = 12348;
     public static final int REQUEST_CODE_costs = 12349;
+    public static final int REQUEST_CODE_RaportFormActivity = 12350;
 
     private Button goToTankFormButton;
     private Button goRepairFormButton;
@@ -72,6 +73,10 @@ public class MainMenuActivity extends AppCompatActivity {
         Gson gson = new Gson();
         editor.putString(AUTO_PREF, gson.toJson(cars));
         editor.apply();
+        if(cars.isEmpty()){
+            Intent intent = new Intent(MainMenuActivity.this, AddCarActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_AddCarFormActivity);
+        }
     }
 
     private void initView() {
@@ -238,7 +243,8 @@ public class MainMenuActivity extends AppCompatActivity {
     private View.OnClickListener goToRaportFormActivity() {
         return v -> {
             Intent intent = new Intent(MainMenuActivity.this, CostRaportActivity.class);
-            startActivity(intent);
+            intent.putExtra(GIVE_CARS_LIST, GsonQuest.make(cars));
+            startActivityForResult(intent, REQUEST_CODE_RaportFormActivity);
 
         };
     }

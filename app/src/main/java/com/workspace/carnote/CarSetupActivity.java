@@ -37,8 +37,8 @@ public class CarSetupActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cars_setup_layout);
-        initAutoList_cars();
         getIntence();
+//        initAutoList_cars();
         initView();
         initArrayAdapter();
     }
@@ -56,25 +56,25 @@ public class CarSetupActivity extends AppCompatActivity {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
-    //TODO ----> Saving in case of activity close TO BE REDONE
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AUTO_PREF222, GsonQuest.make(cars));
-        editor.apply();
-    }
-
-    private void initAutoList_cars() {
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        String string = sharedPreferences.getString(AUTO_PREF222, null);
-        ArrayList<AutoData> newCarsList = GsonQuest.getList(string);
-        if (newCarsList != null) {
-            cars = newCarsList;
-        }
-        else cars = new ArrayList<>();
-    }
+//    //TODO ----> Saving in case of activity close TO BE REDONE
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString(AUTO_PREF222, GsonQuest.make(cars));
+//        editor.apply();
+//    }
+//
+//    private void initAutoList_cars() {
+//        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+//        String string = sharedPreferences.getString(AUTO_PREF222, null);
+//        ArrayList<AutoData> newCarsList = GsonQuest.getList(string);
+//        if (newCarsList != null) {
+//            cars = newCarsList;
+//        }
+//        else cars = new ArrayList<>();
+//    }
 
     @Override
     public void onBackPressed() {
