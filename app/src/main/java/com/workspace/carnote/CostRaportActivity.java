@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +34,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public class CostRaportActivity extends AppCompatActivity  implements DatePickerDialog.OnDateSetListener {
+public class CostRaportActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private TextView carBrandTextView;
     private TextView carModelTextView;
@@ -53,13 +54,15 @@ public class CostRaportActivity extends AppCompatActivity  implements DatePicker
     private DateFormat dateFormat1;
     private Date currentDate;
 
+    private Bundle outState;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cost_raport_layout);
-        getIntence();
         initView();
+        getIntence();
         initArrayAdapter();
         Button goToDetailedRaportFormButton = findViewById(R.id.goToDetailedRaportButton);
         goToDetailedRaportFormButton.setOnClickListener(v -> {
@@ -74,7 +77,7 @@ public class CostRaportActivity extends AppCompatActivity  implements DatePicker
 
     private void getIntence() {
         cars = GsonQuest.getList((String) Objects.requireNonNull(getIntent().getExtras()).get(MainMenuActivity.GIVE_CARS_LIST));
-    }
+      }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void initView() {
@@ -116,7 +119,7 @@ public class CostRaportActivity extends AppCompatActivity  implements DatePicker
 
     private void initializeData() {
         getCarData();
-        if(getCurrentCar().getRecords().size() > 0) {
+        if (getCurrentCar().getRecords().size() > 0) {
             getTotalCosts();
             getAverageMonthlyCost();
         }
@@ -133,7 +136,7 @@ public class CostRaportActivity extends AppCompatActivity  implements DatePicker
     @SuppressLint("SetTextI18n")
     private void getTotalCosts() {
         int result = getTotalCostInner();
-        totalCostsTextView.setText(result+" PLN");
+        totalCostsTextView.setText(result + " PLN");
     }
 
 
@@ -144,12 +147,12 @@ public class CostRaportActivity extends AppCompatActivity  implements DatePicker
         int averageCosts;
         if (months != 0) averageCosts = (int) (totalCost / months);
         else averageCosts = 0;
-        averageCostTextView.setText(averageCosts+" PLN");
+        averageCostTextView.setText(averageCosts + " PLN");
     }
 
     private int getTotalCostInner() {
         int result = 0;
-        for (Record el: getCurrentCar().getRecords()){
+        for (Record el : getCurrentCar().getRecords()) {
             result += el.getCostInPLN();
         }
         return result;
@@ -159,13 +162,13 @@ public class CostRaportActivity extends AppCompatActivity  implements DatePicker
         int actualMonth = getCurrentCar().getRecords().get(0).getDate().getMonth();
         int result = 0;
         List monthlyCostsList = new LinkedList();
-        for (int i = 0; i < getCurrentCar().getRecords().size(); i++){
+        for (int i = 0; i < getCurrentCar().getRecords().size(); i++) {
             Record currentRecord = getCurrentCar().getRecords().get(i);
-            if(currentRecord.getDate().getMonth() == actualMonth){
+            if (currentRecord.getDate().getMonth() == actualMonth) {
                 result += currentRecord.getCostInPLN();
-                if(i == getCurrentCar().getRecords().size() - 1) monthlyCostsList.add(result);
+                if (i == getCurrentCar().getRecords().size() - 1) monthlyCostsList.add(result);
 
-            }else{
+            } else {
                 monthlyCostsList.add(result);
                 result = currentRecord.getCostInPLN();
                 actualMonth = currentRecord.getDate().getMonth();
@@ -198,23 +201,23 @@ public class CostRaportActivity extends AppCompatActivity  implements DatePicker
     @SuppressLint("SetTextI18n")
     private void getMonthCosts() {
         int result = 0;
-        for (Record el: getCurrentCar().getRecords()){
-            if(getDateStr(el.getDate(), "MM").equals(getDateStr(currentDate, "MM"))){
+        for (Record el : getCurrentCar().getRecords()) {
+            if (getDateStr(el.getDate(), "MM").equals(getDateStr(currentDate, "MM"))) {
                 result += el.getCostInPLN();
             }
         }
-        chosenMonthCost.setText(result+" PLN");
+        chosenMonthCost.setText(result + " PLN");
     }
 
     @SuppressLint("SetTextI18n")
     private void dayCosts() {
         int result = 0;
-        for (Record el: getCurrentCar().getRecords()){
-            if(getDateStr(el.getDate(), "dd/MM/YYYY").equals(getDateStr(currentDate, "dd/MM/YYYY"))){
+        for (Record el : getCurrentCar().getRecords()) {
+            if (getDateStr(el.getDate(), "dd/MM/YYYY").equals(getDateStr(currentDate, "dd/MM/YYYY"))) {
                 result += el.getCostInPLN();
             }
         }
-        chosenDayCost.setText(result+" PLN");
+        chosenDayCost.setText(result + " PLN");
     }
 
     public static String getDateStr(Date date, String format) {
@@ -227,7 +230,7 @@ public class CostRaportActivity extends AppCompatActivity  implements DatePicker
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog datePicker = new DatePickerDialog(CostRaportActivity.this, CostRaportActivity.this, year,month,day);
+        DatePickerDialog datePicker = new DatePickerDialog(CostRaportActivity.this, CostRaportActivity.this, year, month, day);
         datePicker.show();
     }
 

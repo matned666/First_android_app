@@ -3,13 +3,13 @@ package com.workspace.carnote;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,10 +22,9 @@ import java.util.Objects;
 
 public class CarSetupActivity extends AppCompatActivity {
 
-    public static final String CARS_DATA = "CARS DATA";
+    public static final String SAVE_INSTANCE = "SAVE_INSTANCE";
 
     private static final int REQUEST_CODE_AddCarFormActivity = 123;
-    public static final String AUTO_PREF222 = "AUTO_PREF2";
     public static final int REQUEST_CODE_EditCarFormActivity =124;
 
     private Spinner autoChooseSpinner;
@@ -38,7 +37,6 @@ public class CarSetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cars_setup_layout);
         getIntence();
-//        initAutoList_cars();
         initView();
         initArrayAdapter();
     }
@@ -56,25 +54,21 @@ public class CarSetupActivity extends AppCompatActivity {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
-//    //TODO ----> Saving in case of activity close TO BE REDONE
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString(AUTO_PREF222, GsonQuest.make(cars));
-//        editor.apply();
-//    }
-//
-//    private void initAutoList_cars() {
-//        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-//        String string = sharedPreferences.getString(AUTO_PREF222, null);
-//        ArrayList<AutoData> newCarsList = GsonQuest.getList(string);
-//        if (newCarsList != null) {
-//            cars = newCarsList;
-//        }
-//        else cars = new ArrayList<>();
-//    }
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putString(SAVE_INSTANCE, GsonQuest.make(cars));
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        getIntence();
+        ArrayList<AutoData> carsTemp = GsonQuest.getList(savedInstanceState.getString(SAVE_INSTANCE));
+        if(!carsTemp.equals(cars)) cars = carsTemp;
+        initView();
+        initArrayAdapter();
+    }
 
     @Override
     public void onBackPressed() {
