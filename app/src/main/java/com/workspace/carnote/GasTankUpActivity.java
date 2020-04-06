@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -48,7 +47,7 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
     private TextView litersTextLabel;
     private TextView costTextLabel;
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +60,7 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
         setTitle(TITLE);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void viewInit() {
         initFields();
         addOnClickListener_ToConfirmButton();
@@ -96,6 +96,7 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
         datePicker.show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void addOnClickListener_ToConfirmButton() {
         confirmButton.setOnClickListener(v -> {
 
@@ -116,6 +117,7 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void addOnFocusChangeListenerTo_Mileage_TextField() {
         mileageEditText.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
@@ -168,22 +170,21 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
     private boolean validateMileage() {
         Integer oldMileage = 0;
         for(int i =0; i < autoData.getRecords().size(); i++) {
-             if(autoData.getRecords().get(i).getRecordType() == RecordType.TANK_UP)   {
+             if(autoData.getRecords().get(i).getRecordType() == RecordType.TANK_UP )   {
                  oldMileage = autoData.getRecords().get(i).getMileage();
                  break;
              }
         }
             if (!mileageEditText.getText().toString().equals("")) {
                 int size = autoData.getRecords().size();
-                if (autoData.getRecords().size() != 0) {
+                if (size != 0) {
                     Integer newMileage = Integer.valueOf(mileageEditText.getText().toString());
-
-
-                    if (newMileage <= oldMileage) {
+                    if (newMileage <= oldMileage ) {
                         mileageErrorChange();
                         return false;
                     } else {
@@ -217,8 +218,7 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
             e.printStackTrace();
         }
         dateFormat = DateFormat.getDateInstance();
-        Date date = new Date();
-        return date;
+        return new Date();
     }
 
     private Integer getCost() {
@@ -233,9 +233,7 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
         return Integer.valueOf(String.valueOf(mileageEditText.getText()));
     }
 
-    private String getOneLiterCost() {
-        return String.valueOf(Double.parseDouble(String.valueOf(costEditText.getText())) / Double.parseDouble(String.valueOf(litersEditText.getText())));
-    }
+
 
     private String getCurrentDate() {
         dateFormat = DateFormat.getDateInstance();

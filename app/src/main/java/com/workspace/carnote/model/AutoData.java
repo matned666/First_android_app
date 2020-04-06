@@ -1,10 +1,14 @@
 package com.workspace.carnote.model;
 
+import android.os.Build;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AutoData implements Serializable{
 
@@ -24,7 +28,10 @@ public class AutoData implements Serializable{
         Records = new LinkedList<>();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public List<Record> getRecords() {
+        RecordsDateComparator comparator = new RecordsDateComparator();
+        Records.sort(comparator.reversed());
         return Records;
     }
 

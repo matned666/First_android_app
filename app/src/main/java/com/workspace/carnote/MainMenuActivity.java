@@ -58,6 +58,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private ArrayList cars;
     private ArrayAdapter<AutoData> spinnerAdapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +80,7 @@ public class MainMenuActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void initView() {
         initializeButtons();
         initializeButtonActions();
@@ -119,6 +121,7 @@ public class MainMenuActivity extends AppCompatActivity {
         autoChooseSpinner.setAdapter(spinnerAdapter);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void initRecycleView() {
         historyLayoutManager = new LinearLayoutManager(this);
         historyRecyclerView.setLayoutManager(historyLayoutManager);
@@ -126,6 +129,7 @@ public class MainMenuActivity extends AppCompatActivity {
         historyRecyclerView.setHasFixedSize(true);
         addNewCarTankUpRecordsList();
         autoChooseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 addNewCarTankUpRecordsList();
@@ -150,12 +154,13 @@ public class MainMenuActivity extends AppCompatActivity {
         } else cars = new ArrayList<>();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void addNewCarTankUpRecordsList() {
         historyAdapter = new HistoryAdapter(this, getCurrentCar() != null ? getCurrentCar().getRecords() : new ArrayList<Record>());
         historyRecyclerView.setAdapter(historyAdapter);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
