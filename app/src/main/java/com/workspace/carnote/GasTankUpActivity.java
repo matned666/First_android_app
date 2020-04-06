@@ -27,6 +27,8 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public class GasTankUpActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -46,6 +48,7 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
     private TextView mileageTextLabel;
     private TextView litersTextLabel;
     private TextView costTextLabel;
+    private Date currentDate;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -58,6 +61,7 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
         }
         viewInit();
         setTitle(TITLE);
+        currentDate = new Date(System.currentTimeMillis());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -169,12 +173,11 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
         return false;
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
     private boolean validateMileage() {
         Integer oldMileage = 0;
-        for(int i =0; i < autoData.getRecords().size(); i++) {
+        for(int i = getRecordPlaceInHistory(currentDate); i < autoData.getRecords().size(); i++) {
              if(autoData.getRecords().get(i).getRecordType() == RecordType.TANK_UP )   {
                  oldMileage = autoData.getRecords().get(i).getMileage();
                  break;
@@ -184,10 +187,15 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
                 int size = autoData.getRecords().size();
                 if (size != 0) {
                     Integer newMileage = Integer.valueOf(mileageEditText.getText().toString());
-                    if (newMileage <= oldMileage ) {
-                        mileageErrorChange();
+
+                    if(!isNextMileageRecordHigher(currentDate, newMileage)) {
+                        mileageErrorChange("Actual mileage equal/higher than next!");
                         return false;
-                    } else {
+                    }
+                        if (newMileage <= oldMileage) {
+                        mileageErrorChange("Actual mileage equal/lower than previous!");
+                        return false;
+                    } else{
                         mileageTextLabel.setText(getResources().getString(R.string.mileage));
                         mileageTextLabel.setTextColor(Color.parseColor("#000000"));
                         return true;
@@ -195,14 +203,34 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
                 }
                 return true;
             } else {
-                mileageErrorChange();
+                mileageErrorChange("Actual mileage equal/lower than previous!");
                 return false;
             }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private boolean isNextMileageRecordHigher(Date date, Integer newMileage){
+        if(getRecordPlaceInHistory(date)==0) return true;
+        else{
+            if(autoData.getRecords().get(getRecordPlaceInHistory(date)-1).getMileage() <= newMileage)
+                return false;
+            else return true;
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private int getRecordPlaceInHistory(Date date){
+        int counter = 0;
+        for (int i = 0; i < autoData.getRecords().size(); i++ ){
+            if(date.compareTo(autoData.getRecords().get(i).getDate()) >= 0) return counter;
+            counter ++;
+        }
+        return counter;
+    }
+
     @SuppressLint("SetTextI18n")
-    private void mileageErrorChange() {
-        mileageTextLabel.setText("Actual mileage equal/lower than previous!");
+    private void mileageErrorChange(String text) {
+        mileageTextLabel.setText(text);
         mileageTextLabel.setTextColor(Color.parseColor("#ff0000"));
     }
 
@@ -250,6 +278,7 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar calendar = new GregorianCalendar(year, month, dayOfMonth);
+        currentDate = calendar.getTime();
         dateEditText.setText(dateFormat.format(calendar.getTime()));
     }
 }

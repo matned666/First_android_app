@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,8 +52,6 @@ public class CostRaportActivity extends AppCompatActivity implements DatePickerD
 
     private DateFormat dateFormat1;
     private Date currentDate;
-
-    private Bundle outState;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -106,6 +103,7 @@ public class CostRaportActivity extends AppCompatActivity implements DatePickerD
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         autoChooseSpinner.setAdapter(spinnerAdapter);
         autoChooseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 initializeData();
@@ -117,6 +115,7 @@ public class CostRaportActivity extends AppCompatActivity implements DatePickerD
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void initializeData() {
         getCarData();
         if (getCurrentCar().getRecords().size() > 0) {
@@ -133,6 +132,7 @@ public class CostRaportActivity extends AppCompatActivity implements DatePickerD
         carPlatesTextView.setText(String.valueOf(getCurrentCar().getPlates()));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
     private void getTotalCosts() {
         int result = getTotalCostInner();
@@ -140,6 +140,7 @@ public class CostRaportActivity extends AppCompatActivity implements DatePickerD
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
     private void getAverageMonthlyCost() {
         double totalCost = getTotalCostInner();
@@ -150,6 +151,7 @@ public class CostRaportActivity extends AppCompatActivity implements DatePickerD
         averageCostTextView.setText(averageCosts + " PLN");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private int getTotalCostInner() {
         int result = 0;
         for (Record el : getCurrentCar().getRecords()) {
@@ -158,6 +160,7 @@ public class CostRaportActivity extends AppCompatActivity implements DatePickerD
         return result;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private List getMonthlyCostsList() {
         int actualMonth = getCurrentCar().getRecords().get(0).getDate().getMonth();
         int result = 0;
@@ -189,6 +192,7 @@ public class CostRaportActivity extends AppCompatActivity implements DatePickerD
         return dateFormat1.format(date);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar calendar1 = new GregorianCalendar(year, month, dayOfMonth);
@@ -198,6 +202,7 @@ public class CostRaportActivity extends AppCompatActivity implements DatePickerD
         getMonthCosts();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
     private void getMonthCosts() {
         int result = 0;
@@ -209,6 +214,7 @@ public class CostRaportActivity extends AppCompatActivity implements DatePickerD
         chosenMonthCost.setText(result + " PLN");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
     private void dayCosts() {
         int result = 0;

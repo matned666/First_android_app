@@ -176,6 +176,7 @@ public class MainMenuActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
                     getCurrentCar().getRecords().add(0,(Record) data.getExtras().get(GasTankUpActivity.AUTO_DATA_NEW_TANK_UP));
+                    getCurrentCar().getRecords();
                 }
             }
         }
