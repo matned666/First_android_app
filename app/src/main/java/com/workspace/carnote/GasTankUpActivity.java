@@ -210,12 +210,25 @@ public class GasTankUpActivity extends AppCompatActivity implements DatePickerDi
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private boolean isNextMileageRecordHigher(Date date, Integer newMileage){
-        if(getRecordPlaceInHistory(date)==0) return true;
-        else{
-            if(autoData.getRecords().get(getRecordPlaceInHistory(date)-1).getMileage() <= newMileage)
-                return false;
-            else return true;
+        if(getNextTankUpRecord(date) != null) {
+            if (getRecordPlaceInHistory(date) == 0) return true;
+            else {
+                return Objects.requireNonNull(getNextTankUpRecord(date)).getMileage() > newMileage;
+            }
         }
+        return true;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private Record getNextTankUpRecord(Date date){
+        int newRecordPlace = getRecordPlaceInHistory(date);
+        if(newRecordPlace > 0) {
+            for (int i = newRecordPlace - 1; i >= 0; i--) {
+                if (autoData.getRecords().get(i).getRecordType() == RecordType.TANK_UP)
+                    return autoData.getRecords().get(i);
+            }
+        }
+        return null;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
