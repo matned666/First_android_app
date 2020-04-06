@@ -81,8 +81,10 @@
                 android:layout_height="156dp"
                 android:autofillHints="Car's model"
                 android:ems="10"
-                android:inputType="textPersonName"
-                tools:ignore="LabelFor" />
+                android:inputType="textMultiLine"
+                tools:ignore="LabelFor"
+                android:scrollHorizontally="false"
+                android:gravity="top" />
 
             <TextView
                 android:id="@+id/textView22"
