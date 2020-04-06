@@ -77,7 +77,8 @@
                     android:layout_toRightOf="@id/textView2"
 
                     style="@style/textFieldRaportInformation"
-                    android:text="" />
+                    android:text=""
+                    android:layout_toEndOf="@id/textView2" />
                 <TextView
                     android:id="@+id/textView3"
                     style="@style/commonEditTextStyleNoBottomMargin"
@@ -111,7 +112,8 @@
                     android:layout_below="@id/carModelTextView"
                     android:layout_toRightOf="@id/textView4"
                     style="@style/textFieldRaportInformation"
-                    android:text="" />
+                    android:text=""
+                    android:layout_toEndOf="@id/textView4" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -119,15 +121,20 @@
                     android:layout_below="@id/carPlatesTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Color:" />
+                    android:text="@string/color" />
 
-                 <TextView
+                <TextView
                     android:id="@+id/carColorTextView"
+                    style="@style/textFieldRaportInformation"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/carPlatesTextView"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toEndOf="@id/textView5"
                     android:layout_toRightOf="@id/textView5"
-                    style="@style/textFieldRaportInformation"
                     android:text="" />
 
                 <TextView
@@ -142,7 +149,7 @@
                     android:layout_below="@id/space1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total costs:" />
+                    android:text="@string/total_costs" />
 
                 <TextView
                     android:id="@+id/carTotalCostsTextView"
@@ -151,7 +158,8 @@
                     android:layout_below="@id/space1"
                     android:layout_toRightOf="@id/textView6"
                     style="@style/textFieldRaportInformation"
-                    android:text="" />
+                    android:text=""
+                    android:layout_toEndOf="@id/textView6" />
 
                 <TextView
                     android:id="@+id/raportTextView7"
@@ -160,7 +168,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/carTotalCostsTextView"
                     android:layout_marginTop="0dp"
-                    android:text="Average monthly cost:" />
+                    android:text="@string/average_monthly_cost" />
 
                 <TextView
                     android:id="@+id/carMonthlyCostsTextView"
@@ -170,7 +178,8 @@
                     android:layout_below="@+id/carTotalCostsTextView"
                     android:layout_marginTop="0dp"
                     android:layout_toRightOf="@id/raportTextView7"
-                    android:text="" />
+                    android:text=""
+                    android:layout_toEndOf="@id/raportTextView7" />
 
                 <TextView
                     android:id="@+id/raportTextView8"
@@ -179,7 +188,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/carMonthlyCostsTextView"
                     android:layout_marginTop="0dp"
-                    android:text="Pick date to check costs:" />
+                    android:text="@string/pick_date_to_check_costs" />
 
                 <EditText
                     android:id="@+id/dateMonthPicker"
@@ -190,7 +199,8 @@
                     android:layout_marginTop="0dp"
                     android:ems="10"
                     android:inputType="date"
-                    style="@style/textFieldPickerRaportInformation" />
+                    style="@style/textFieldPickerRaportInformation"
+                    android:layout_toEndOf="@id/raportTextView8" />
 
                 <TextView
                     android:id="@+id/raportTextView9"
@@ -199,7 +209,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/dateMonthPicker"
                     android:layout_marginTop="0dp"
-                    android:text="Chosen month costs:" />
+                    android:text="@string/chosen_month_costs" />
 
                 <TextView
                     android:id="@+id/carChosenMonthCostsTextView"
@@ -207,7 +217,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/dateMonthPicker"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
                     android:layout_marginTop="0dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toEndOf="@id/raportTextView9"
                     android:layout_toRightOf="@id/raportTextView9"
                     android:text="" />
 
@@ -222,7 +237,7 @@
                     android:layout_marginStart="9dp"
                     android:layout_marginLeft="9dp"
                     android:layout_marginTop="19dp"
-                    android:text="Chosen day costs:" />
+                    android:text="@string/chosen_day_costs" />
 
                 <TextView
                     android:id="@+id/carChosenDayCostsTextView"
@@ -230,7 +245,42 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/carChosenMonthCostsTextView"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toEndOf="@id/raportTextView11"
+                    android:layout_toRightOf="@id/raportTextView11"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/raportTextView12"
+                    style="@style/commonEditTextStyleNoBottomMargin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/raportTextView11"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginStart="9dp"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginTop="9dp"
+                    android:text="@string/average_fuel_consumption" />
+
+                <TextView
+                    android:id="@+id/carAverageFuelConsumptionTextView"
+                    style="@style/textFieldRaportInformation"
+                    android:layout_width="124dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/carChosenDayCostsTextView"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toEndOf="@id/raportTextView11"
                     android:layout_toRightOf="@id/raportTextView11"
                     android:text="" />
 
@@ -243,16 +293,16 @@
                 style="@style/commonEditTextStyleBottomAndTopMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="See detailed car raport"
-                android:textSize="20dp" />
+                android:text="@string/see_detailed_car_raport"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/confirm"
                 style="@style/commonEditTextStyleBottomAndTopMargin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Save detailed raport to PDF"
-                android:textSize="15dp" />
+                android:layout_height="25dp"
+                android:text="@string/save_detailed_raport_to_pdf"
+                android:textSize="15sp" />
 
         </LinearLayout>
     </ScrollView>
@@ -260,7 +310,7 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="match_parent"
-        android:layout_height="78dp"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/car_logo"
         android:tint="#0A7369"
         app:srcCompat="@drawable/ic_logo" />

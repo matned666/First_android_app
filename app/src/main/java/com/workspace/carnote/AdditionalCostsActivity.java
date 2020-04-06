@@ -33,7 +33,6 @@ public class AdditionalCostsActivity extends AppCompatActivity implements DatePi
     private EditText descriptionEditText;
     private TextView descriptionLabel;
     private TextView costLabel;
-    private TextView dateLabel;
     private DateFormat dateFormat;
 
     @Override
@@ -48,7 +47,6 @@ public class AdditionalCostsActivity extends AppCompatActivity implements DatePi
         dateEditText = findViewById(R.id.cost_date);
         costEditText = findViewById(R.id.cost_cost);
         descriptionEditText = findViewById(R.id.cost_description);
-        dateLabel = findViewById(R.id.cost_date_label);
         costLabel = findViewById(R.id.cost_cost_label);
         descriptionLabel = findViewById(R.id.cost_description_label);
 
@@ -102,8 +100,7 @@ public class AdditionalCostsActivity extends AppCompatActivity implements DatePi
             e.printStackTrace();
         }
         dateFormat = DateFormat.getDateInstance();
-        Date date = new Date();
-        return date;
+        return new Date();
     }
 
     private Integer getCost() {
@@ -120,7 +117,7 @@ public class AdditionalCostsActivity extends AppCompatActivity implements DatePi
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog datePicker = new DatePickerDialog(AdditionalCostsActivity.this, (DatePickerDialog.OnDateSetListener) AdditionalCostsActivity.this, year,month,day);
+        DatePickerDialog datePicker = new DatePickerDialog(AdditionalCostsActivity.this, AdditionalCostsActivity.this, year,month,day);
         datePicker.show();
     }
 

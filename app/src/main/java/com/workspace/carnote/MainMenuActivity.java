@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.workspace.carnote.model.AutoData;
 import com.workspace.carnote.model.GsonQuest;
@@ -37,22 +36,16 @@ public class MainMenuActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_AddCarFormActivity = 12344;
     private static final int REQUEST_CODE_CarFormActivity = 12345;
     private static final int REQUEST_CODE_tankUpActivity = 12346;
-    public static final int REQUEST_CODE_repair = 12347;
-    public static final int REQUEST_CODE_collision = 12348;
     public static final int REQUEST_CODE_costs = 12349;
     public static final int REQUEST_CODE_RaportFormActivity = 12350;
 
     private Button goToTankFormButton;
-    private Button goRepairFormButton;
-    private Button goCollisionFormButton;
     private Button goCarsFormButton;
     private Button goToAdditionalCostsFormButton;
     private Button goToRaportFormButton;
-    private Button goToSettingsFormButton;
 
     private RecyclerView historyRecyclerView;
     private RecyclerView.Adapter<HistoryAdapter.ViewHolder> historyAdapter;
-    private RecyclerView.LayoutManager historyLayoutManager;
 
     private Spinner autoChooseSpinner;
     private ArrayList cars;
@@ -96,23 +89,17 @@ public class MainMenuActivity extends AppCompatActivity {
     private void initializeButtons() {
         goToTankFormButton = findViewById(R.id.go_to_tank_btn);
         goCarsFormButton = findViewById(R.id.go_to_car_form_btn);
-        goRepairFormButton = findViewById(R.id.go_to_repair_btn);
-        goCollisionFormButton = findViewById(R.id.go_to_collision_btn);
         autoChooseSpinner = findViewById(R.id.auto_choose_spinner);
         goToAdditionalCostsFormButton = findViewById(R.id.go_to_add_insurance_btn);
         goToRaportFormButton = findViewById(R.id.go_to_raport_btn);
-        goToSettingsFormButton = findViewById(R.id.settings_btn);
         historyRecyclerView = findViewById(R.id.history_recycleView);
     }
 
     private void initializeButtonActions() {
         goToTankFormButton.setOnClickListener(goToTankUpActivity());
         goCarsFormButton.setOnClickListener(goToCarFormActivity());
-        goRepairFormButton.setOnClickListener(goToRepairFormActivity());
-        goCollisionFormButton.setOnClickListener(goToCollisionFormActivity());
         goToAdditionalCostsFormButton.setOnClickListener(goToAdditionalCostsFormActivity());
         goToRaportFormButton.setOnClickListener(goToRaportFormActivity());
-        goToSettingsFormButton.setOnClickListener(goToSettingsFormActivity());
     }
 
     private void initArrayAdapter() {
@@ -123,7 +110,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void initRecycleView() {
-        historyLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager historyLayoutManager = new LinearLayoutManager(this);
         historyRecyclerView.setLayoutManager(historyLayoutManager);
 
         historyRecyclerView.setHasFixedSize(true);
@@ -156,7 +143,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void addNewCarTankUpRecordsList() {
-        historyAdapter = new HistoryAdapter(this, getCurrentCar() != null ? getCurrentCar().getRecords() : new ArrayList<Record>());
+        historyAdapter = new HistoryAdapter(this, getCurrentCar() != null ? getCurrentCar().getRecords() : new ArrayList<>());
         historyRecyclerView.setAdapter(historyAdapter);
     }
 
@@ -175,7 +162,7 @@ public class MainMenuActivity extends AppCompatActivity {
         } else if (requestCode == REQUEST_CODE_tankUpActivity) {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
-                    getCurrentCar().getRecords().add(0,(Record) data.getExtras().get(GasTankUpActivity.AUTO_DATA_NEW_TANK_UP));
+                    getCurrentCar().getRecords().add(0,(Record) Objects.requireNonNull(data.getExtras()).get(GasTankUpActivity.AUTO_DATA_NEW_TANK_UP));
                     getCurrentCar().getRecords();
                 }
             }
@@ -184,7 +171,7 @@ public class MainMenuActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_AddCarFormActivity) {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
-                    AutoData newAutoData = (AutoData) data.getExtras().get(AddCarActivity.AUTO_DATA_NEW_CAR);
+                    AutoData newAutoData = (AutoData) Objects.requireNonNull(data.getExtras()).get(AddCarActivity.AUTO_DATA_NEW_CAR);
                     Boolean isNewCarDefaultCar = (Boolean) data.getExtras().get(AddCarActivity.IS_NEW_CAR_DEFAULT);
 
                     if (isNewCarDefaultCar != null && isNewCarDefaultCar) {
@@ -198,22 +185,10 @@ public class MainMenuActivity extends AppCompatActivity {
                     autoChooseSpinner.setSelection(cars.size()-1, false);
                 }
             }
-        }else if (requestCode == REQUEST_CODE_repair) {
-            if (resultCode == Activity.RESULT_OK) {
-                if (data != null) {
-                    getCurrentCar().getRecords().add(0,(Record) data.getExtras().get(RepairActivity.AUTO_DATA));
-                }
-            }
-        }else if (requestCode == REQUEST_CODE_collision) {
-            if (resultCode == Activity.RESULT_OK) {
-                if (data != null) {
-                    getCurrentCar().getRecords().add(0,(Record) data.getExtras().get(RepairActivity.AUTO_DATA));
-                }
-            }
         }else if (requestCode == REQUEST_CODE_costs) {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
-                    getCurrentCar().getRecords().add(0,(Record) data.getExtras().get(RepairActivity.AUTO_DATA));
+                    getCurrentCar().getRecords().add(0,(Record) Objects.requireNonNull(data.getExtras()).get(AdditionalCostsActivity.AUTO_DATA));
                 }
             }
         }
@@ -237,37 +212,11 @@ public class MainMenuActivity extends AppCompatActivity {
         };
     }
 
-    private View.OnClickListener goToCollisionFormActivity() {
-        return v -> {
-            Intent intent = new Intent(MainMenuActivity.this, CollisionActivity.class);
-            intent.putExtra(SPECIAL_DATA, getCurrentCar());
-            startActivityForResult(intent, REQUEST_CODE_collision);
-
-        };
-    }
-
     private View.OnClickListener goToRaportFormActivity() {
         return v -> {
             Intent intent = new Intent(MainMenuActivity.this, CostRaportActivity.class);
             intent.putExtra(GIVE_CARS_LIST, GsonQuest.make(cars));
             startActivityForResult(intent, REQUEST_CODE_RaportFormActivity);
-
-        };
-    }
-
-    private View.OnClickListener goToRepairFormActivity() {
-        return v -> {
-            Intent intent = new Intent(MainMenuActivity.this, RepairActivity.class);
-            intent.putExtra(SPECIAL_DATA, getCurrentCar());
-            startActivityForResult(intent, REQUEST_CODE_repair);
-
-        };
-    }
-
-    private View.OnClickListener goToSettingsFormActivity() {
-        return v -> {
-            Intent intent = new Intent(MainMenuActivity.this, SettingsActivity.class);
-            startActivity(intent);
 
         };
     }

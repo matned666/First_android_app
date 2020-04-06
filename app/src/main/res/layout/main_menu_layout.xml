@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="DEFAULT COMPANY"
+                android:text="CAR NOTEBOOK"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
@@ -60,74 +60,39 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/history_recycleView"
                     style="@style/textFieldRaportInformation"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="382dp"
+                    android:layout_height="359dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
-                    app:layout_constraintBottom_toTopOf="@+id/imageView2"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.52" />
-
-                <Button
-                    android:id="@+id/go_to_collision_btn"
-                    style="@style/commonEditTextStyleBottomMargin"
-                    android:layout_width="80dp"
-                    android:layout_height="65dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:backgroundTint="#1FCDBD"
-                    android:drawableTop="@drawable/ic_crash"
-                    android:text="@string/new_collision"
-                    android:textSize="12sp"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/history_recycleView"
-                    app:layout_constraintVertical_bias="1.0"
-                    tools:targetApi="lollipop" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/go_to_tank_btn"
                     style="@style/commonEditTextStyleBottomMargin"
                     android:layout_width="80dp"
                     android:layout_height="65dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginBottom="8dp"
                     android:backgroundTint="#1FCDBD"
                     android:drawableTop="@drawable/ic_new_tank_up"
                     android:text="@string/new_tank_up"
                     android:textSize="12sp"
-                    app:layout_constraintBottom_toTopOf="@+id/go_to_raport_btn"
-                    app:layout_constraintEnd_toEndOf="@+id/go_to_raport_btn"
-                    app:layout_constraintStart_toStartOf="@+id/go_to_raport_btn"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                    tools:targetApi="lollipop" />
-
-                <Button
-                    android:id="@+id/go_company_settings_btn"
-                    style="@style/commonEditTextStyleBottomMargin"
-                    android:layout_width="80dp"
-                    android:layout_height="65dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:backgroundTint="#1FCDBD"
-                    android:drawableTop="@drawable/ic_group_work"
-                    android:text="company"
-                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/history_recycleView"
-                    app:layout_constraintVertical_bias="1.0"
+                    app:layout_constraintHorizontal_bias="0.112"
+                    app:layout_constraintStart_toEndOf="@+id/go_to_add_insurance_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
                     tools:targetApi="lollipop" />
 
                 <Button
@@ -137,6 +102,7 @@
                     android:layout_height="65dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
@@ -146,8 +112,9 @@
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.666"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
                     tools:targetApi="lollipop" />
 
                 <Button
@@ -155,6 +122,9 @@
                     style="@style/commonEditTextStyleBottomMargin"
                     android:layout_width="80dp"
                     android:layout_height="65dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
@@ -162,10 +132,11 @@
                     android:drawableTop="@drawable/ic_add_new_car"
                     android:text="@string/add_new_car"
                     android:textSize="12sp"
-                    app:layout_constraintBottom_toTopOf="@+id/go_company_settings_btn"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/go_company_settings_btn"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/go_to_tank_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
                     tools:targetApi="lollipop" />
 
                 <Button
@@ -173,58 +144,19 @@
                     style="@style/commonEditTextStyleBottomMargin"
                     android:layout_width="80dp"
                     android:layout_height="65dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:backgroundTint="#1FCDBD"
                     android:drawableTop="@drawable/ic_insurance"
                     android:text="@string/add_insurance"
                     android:textSize="12sp"
-                    app:layout_constraintBottom_toTopOf="@+id/settings_btn"
-                    app:layout_constraintEnd_toEndOf="@+id/settings_btn"
-                    app:layout_constraintStart_toStartOf="@+id/settings_btn"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                    tools:targetApi="lollipop" />
-
-                <Button
-                    android:id="@+id/go_to_repair_btn"
-                    style="@style/commonEditTextStyleBottomMargin"
-                    android:layout_width="80dp"
-                    android:layout_height="65dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:backgroundTint="#1FCDBD"
-                    android:drawableTop="@drawable/ic_new_repair"
-                    android:text="@string/new_repair"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toTopOf="@+id/go_to_raport_btn"
-                    app:layout_constraintEnd_toEndOf="@+id/go_to_collision_btn"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                    tools:targetApi="lollipop" />
-
-                <Button
-                    android:id="@+id/settings_btn"
-                    style="@style/commonEditTextStyleBottomMargin"
-                    android:layout_width="80dp"
-                    android:layout_height="65dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:backgroundTint="#1FCDBD"
-                    android:drawableTop="@drawable/ic_settings"
-                    android:text="@string/settings"
-                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.336"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/history_recycleView"
-                    app:layout_constraintVertical_bias="1.0"
+                    app:layout_constraintHorizontal_bias="0.004"
+                    app:layout_constraintStart_toEndOf="@+id/go_to_raport_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
                     tools:targetApi="lollipop" />
 
                 <ImageView
@@ -242,7 +174,7 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.68"
+                    app:layout_constraintVertical_bias="0.79"
                     app:srcCompat="@drawable/ic_logo" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -250,7 +182,7 @@
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="match_parent"
-                android:layout_height="142dp"
+                android:layout_height="141dp"
                 android:contentDescription="@string/car_logo"
                 android:tint="#0A7369"
                 app:srcCompat="@drawable/ic_logo" />

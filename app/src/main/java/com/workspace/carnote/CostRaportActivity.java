@@ -3,6 +3,7 @@ package com.workspace.carnote;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
@@ -22,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.workspace.carnote.model.AutoData;
 import com.workspace.carnote.model.GsonQuest;
 import com.workspace.carnote.model.Record;
+import com.workspace.carnote.model.RecordType;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -43,6 +45,7 @@ public class CostRaportActivity extends AppCompatActivity implements DatePickerD
     private TextView averageCostTextView;
     private TextView chosenMonthCost;
     private TextView chosenDayCost;
+    private TextView carAverageFuelConsumptionTextView;
 
     private EditText dateMonthEditText;
 
@@ -70,6 +73,7 @@ public class CostRaportActivity extends AppCompatActivity implements DatePickerD
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dayCosts();
         getMonthCosts();
+        getAverageFuelConsumptionTextView();
     }
 
     private void getIntence() {
@@ -83,6 +87,7 @@ public class CostRaportActivity extends AppCompatActivity implements DatePickerD
         carColorTextView = findViewById(R.id.carColorTextView);
         carPlatesTextView = findViewById(R.id.carPlatesTextView);
         totalCostsTextView = findViewById(R.id.carTotalCostsTextView);
+        carAverageFuelConsumptionTextView = findViewById(R.id.carAverageFuelConsumptionTextView);
         averageCostTextView = findViewById(R.id.carMonthlyCostsTextView);
         chosenMonthCost = findViewById(R.id.carChosenMonthCostsTextView);
         chosenDayCost = findViewById(R.id.carChosenDayCostsTextView);
@@ -190,6 +195,56 @@ public class CostRaportActivity extends AppCompatActivity implements DatePickerD
         Date date = new Date();
         currentDate = new Date(System.currentTimeMillis());
         return dateFormat1.format(date);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @SuppressLint("SetTextI18n")
+    private void getAverageFuelConsumptionTextView(){
+        int consumption;
+        Record firstTankUp = getFirstTankUpRecord();
+        Record lastTankUp = getLastTankUpRecord();
+        int totalTankUp = getTotalTankUp();
+        if (firstTankUp != null && lastTankUp != null && totalTankUp > 0) {
+            double kmTotallyDone = lastTankUp.getMileage() - firstTankUp.getMileage();
+            if(kmTotallyDone > 0) {
+                consumption = (int) (totalTankUp / kmTotallyDone * 100);
+                carAverageFuelConsumptionTextView.setText(consumption + " l/100km");
+                carAverageFuelConsumptionTextView.setTextColor(Color.parseColor("#000000"));
+            }
+        }else{
+            carAverageFuelConsumptionTextView.setText("Not enough records!");
+            carAverageFuelConsumptionTextView.setTextColor(Color.parseColor("#ff0000"));
+        }
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private int getTotalTankUp() {
+       return getCurrentCar().getRecords()
+               .stream()
+               .filter(x -> x.getRecordType() == RecordType.TANK_UP)
+               .mapToInt(Record::getTankedUpGasLiters)
+               .sum();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private Record getFirstTankUpRecord() {
+        List<Record> tankUpRecords = getCurrentCar().getRecords();
+        for (int i = tankUpRecords.size()-1; i>=0 ; i--){
+            if(tankUpRecords.get(i).getRecordType() == RecordType.TANK_UP)
+                return tankUpRecords.get(i);
+        }
+        return null;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private Record getLastTankUpRecord() {
+        List<Record> tankUpRecords = getCurrentCar().getRecords();
+        for (int i = 0; i < tankUpRecords.size()-1 ; i++){
+            if(tankUpRecords.get(i).getRecordType() == RecordType.TANK_UP)
+                return tankUpRecords.get(i);
+        }
+        return null;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

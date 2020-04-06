@@ -31,5 +31,14 @@
     <string name="car_brand">Car brand:</string>
     <string name="car_model">Car model:</string>
     <string name="registry_plates">Registry plates:</string>
+    <string name="color">Color:</string>
+    <string name="total_costs">Total costs:</string>
+    <string name="average_monthly_cost">Average monthly cost:</string>
+    <string name="pick_date_to_check_costs">Pick date to check costs:</string>
+    <string name="chosen_month_costs">Chosen month costs:</string>
+    <string name="chosen_day_costs">Chosen day costs:</string>
+    <string name="average_fuel_consumption">Average fuel consumption:</string>
+    <string name="see_detailed_car_raport">See detailed car raport</string>
+    <string name="save_detailed_raport_to_pdf">Save detailed raport to EXCEL</string>
 
 </resources>

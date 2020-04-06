@@ -27,8 +27,6 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
 
 public class GasTankUpActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {

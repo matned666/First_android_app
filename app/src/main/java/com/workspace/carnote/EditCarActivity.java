@@ -65,9 +65,7 @@ public class EditCarActivity extends AppCompatActivity {
             }
         });
 
-        confirmButton.setOnClickListener(v -> {
-            onClick();
-        });
+        confirmButton.setOnClickListener(v -> onClick());
 
 
     }

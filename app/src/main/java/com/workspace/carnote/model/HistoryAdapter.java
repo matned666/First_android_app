@@ -2,7 +2,6 @@ package com.workspace.carnote.model;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +22,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     private Context context;
     private List<Record> recordsList;
-    private Record record;
-    private Drawable drawable;
 
     public HistoryAdapter(Context context, List<Record> recordsList) {
         this.context = context;
@@ -34,7 +31,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_history_item,null);
+       @SuppressLint("InflateParams") View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_history_item,null);
        return new ViewHolder(view);
     }
 
@@ -42,7 +39,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        record = recordsList.get(position);
+        Record record = recordsList.get(position);
+        Drawable drawable;
         if(record.getRecordType() == RecordType.TANK_UP) {
             drawable = context.getResources().getDrawable(R.drawable.ic_local_gas_station);
             holder.activityImageView.setImageDrawable(drawable);
@@ -51,22 +49,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             holder.historyTextViewTopRight.setText("Mileage: " + record.getMileage().toString() + " km");
             holder.historyTextViewBottomLeft.setText("Tanked: " + record.getTankedUpGasLiters().toString() + " L");
             holder.historyTextViewBottomRight.setText("for: " + record.getCostInPLN().toString() + " PLN");
-        }else if(record.getRecordType() == RecordType.COLLISION) {
-            drawable = context.getResources().getDrawable(R.drawable.ic_history_collision);
-            holder.activityImageView.setImageDrawable(drawable);
-            DateFormat dateFormat = DateFormat.getDateInstance();
-            holder.historyTextViewTopLeft.setText(dateFormat.format(record.getDate()));
-            holder.historyTextViewTopRight.setText("COLLISION");
-            holder.historyTextViewBottomLeft.setText("Cost: " + record.getCostInPLN().toString() + " PLN");
-            holder.historyTextViewBottomRight.setText(record.getDescription());
-        }else if(record.getRecordType() == RecordType.REPAIR) {
-            drawable = context.getResources().getDrawable(R.drawable.ic_history_repair);
-            holder.activityImageView.setImageDrawable(drawable);
-            DateFormat dateFormat = DateFormat.getDateInstance();
-            holder.historyTextViewTopLeft.setText(dateFormat.format(record.getDate()));
-            holder.historyTextViewTopRight.setText("REPAIR");
-            holder.historyTextViewBottomLeft.setText("Cost: " + record.getCostInPLN().toString() + " PLN");
-            holder.historyTextViewBottomRight.setText(record.getDescription());
         }else if(record.getRecordType() == RecordType.COST) {
             drawable = context.getResources().getDrawable(R.drawable.ic_history_cost);
             holder.activityImageView.setImageDrawable(drawable);
@@ -76,28 +58,17 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             holder.historyTextViewBottomLeft.setText("Cost: " + record.getCostInPLN().toString() + " PLN");
             holder.historyTextViewBottomRight.setText(record.getDescription());
         }
-            holder.deleteItemImageView.setOnClickListener(v -> {
-                confirmCarRemoveDialog(position);
-            });
+            holder.deleteItemImageView.setOnClickListener(v -> confirmCarRemoveDialog(position));
 
     }
 
     private void confirmCarRemoveDialog(int position) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this.context);
         dialog  .setMessage("REMOVE THE SELECTED RECORD?")
-                .setPositiveButton("NO",  new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-
-                    }
-                })
-                .setNegativeButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog,int id) {
-                        recordsList.remove(position);
-                        HistoryAdapter.this.notifyDataSetChanged();
-                    }
+                .setPositiveButton("NO", (dialog1, id) -> dialog1.cancel())
+                .setNegativeButton("YES", (dialog12, id) -> {
+                    recordsList.remove(position);
+                    HistoryAdapter.this.notifyDataSetChanged();
                 })
                 .show();
     }
@@ -108,16 +79,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         else return recordsList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        protected ImageView activityImageView;
-        protected ImageView deleteItemImageView;
-        protected TextView historyTextViewTopLeft;
-        protected TextView historyTextViewBottomLeft;
-        protected TextView historyTextViewTopRight;
-        protected TextView historyTextViewBottomRight;
+        ImageView activityImageView;
+        ImageView deleteItemImageView;
+        TextView historyTextViewTopLeft;
+        TextView historyTextViewBottomLeft;
+        TextView historyTextViewTopRight;
+        TextView historyTextViewBottomRight;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.activityImageView = itemView.findViewById(R.id.history_item_image);
             this.deleteItemImageView = itemView.findViewById(R.id.delete_item_image_view);
